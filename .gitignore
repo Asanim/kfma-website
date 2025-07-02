@@ -30,3 +30,5 @@ amplifyconfiguration*
 
 *.js
 *.d.ts
+
+archive/

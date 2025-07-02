@@ -83,7 +83,7 @@ const Other = () => {
         </Box>
 
         {/* Quick Actions */}
-        <Grid container spacing={4} sx={{ mb: 6 }}>
+        <Grid container sx={{ mb: 6 }}>
           <Grid xs={12} md={6}>
             <InfoCard>
               <CardContent sx={{ textAlign: 'center' }}>
@@ -256,7 +256,7 @@ const Other = () => {
             KFMA Community
           </SectionTitle>
 
-          <Grid container spacing={3} sx={{ mb: 4 }}>
+          <Grid container sx={{ mb: 4 }}>
             <Grid xs={12} sm={6} md={3}>
               <Card sx={{
                 backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#fff',
@@ -324,7 +324,7 @@ const Other = () => {
         </Box>
 
         {/* Quick Actions */}
-        <Grid container spacing={4} sx={{ mb: 6 }}>
+        <Grid container sx={{ mb: 6 }}>
           <Grid xs={12} md={6}>
             <InfoCard>
               <CardContent sx={{ textAlign: 'center' }}>
@@ -410,7 +410,7 @@ const Other = () => {
         <Dialog open={contactOpen} onClose={() => setContactOpen(false)} maxWidth="sm" fullWidth>
           <DialogTitle sx={{ fontFamily: 'Roboto, sans-serif' }}>Contact KFMA</DialogTitle>
           <DialogContent>
-            <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid container sx={{ mt: 1 }}>
               <Grid xs={12} sm={6}>
                 <TextField
                   fullWidth

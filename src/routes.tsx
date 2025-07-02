@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import RootLayout from './components/RootLayout';
-import Home from './components/Home';
-import About from './components/About';
-import Pricing from './components/Pricing';
-import Blog from './components/Blog';
-import Gallery from './components/Gallery';
-import Admin from './components/Admin';
-import Other from './components/Other';
+import RootLayout from './pages/RootLayout';
+import Home from './pages/Home';
+import About from './pages/About';
+import Pricing from './pages/Pricing';
+import Blog from './pages/Blog';
+import Gallery from './pages/Gallery';
+import Admin from './pages/Admin';
+import Other from './pages/Other';
 
 // Create router with the RootLayout as the main wrapper
 const createRouter = (darkMode: boolean, toggleDarkMode: () => void) => {

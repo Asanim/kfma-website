@@ -70,7 +70,7 @@ const Pricing = () => {
             Quality martial arts training at affordable rates
           </Typography>
 
-          <Grid container spacing={2} sx={{ mt: 2 }}>
+          <Grid container sx={{ mt: 2 }}>
             <Grid xs={12} md={6}>
               <Typography
                 variant="h6"
@@ -464,7 +464,7 @@ const Pricing = () => {
             Equipment & Uniforms
           </SectionTitle>
 
-          <Grid container spacing={3} sx={{ mb: 4 }}>
+          <Grid container sx={{ mb: 4 }}>
             <Grid xs={12} sm={6} md={4}>
               <Card sx={{
                 backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#fff',
