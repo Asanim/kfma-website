@@ -103,10 +103,6 @@ const RootLayout: React.FC<RootLayoutProps> = () => {
         { text: 'Admin', path: '/admin', icon: <AdminIcon /> }
     ];
 
-    const handleDrawerToggle = () => {
-        setDrawerOpen(!drawerOpen);
-    };
-
     const handleNavigation = (path: string) => {
         navigate(path);
         if (isMobile) {
@@ -132,21 +128,6 @@ const RootLayout: React.FC<RootLayoutProps> = () => {
         <Box sx={{ display: 'flex', minHeight: '100vh' }}>
             <StyledAppBar position="fixed" elevation={0}>
                 <Toolbar>
-                    {/* Mobile Menu Button */}
-                    {/* <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{
-                            mr: 2,
-                            display: { md: 'none' },
-                            color: theme.palette.mode === 'dark' ? 'white' : '#333'
-                        }}
-                    >
-                        <MenuIcon />
-                    </IconButton> */}
-
                     {/* Logo */}
                     <Box sx={{ display: 'flex', alignItems: 'center', mr: 4 }}>
                         <Logo
