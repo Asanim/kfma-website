@@ -35,21 +35,17 @@ import {
 import { styled } from '@mui/material/styles';
 import {
   Schedule as ScheduleIcon,
-  YouTube as YouTubeIcon,
-  Facebook as FacebookIcon,
-  Instagram as InstagramIcon,
+  LocationOn as LocationIcon,
+  Email as EmailIcon,
+  Phone as PhoneIcon,
+  EmojiEvents as TrophyIcon,
   ArrowBackIos,
   ArrowForwardIos,
-  LocationOn as LocationIcon,
-  AttachMoney as MoneyIcon,
-  Close as CloseIcon,
-  Phone as PhoneIcon,
-  Email as EmailIcon,
-  EmojiEvents as TrophyIcon,
-  DateRange as DateIcon,
-  Star as StarIcon,
   KeyboardArrowUp as ArrowUpIcon,
-  Menu as MenuIcon
+  Close as CloseIcon,
+  Facebook as FacebookIcon,
+  Instagram as InstagramIcon,
+  YouTube as YouTubeIcon
 } from '@mui/icons-material';
 
 // Styled components
@@ -258,8 +254,6 @@ const Home = () => {
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [contactModalOpen, setContactModalOpen] = useState(false);
   const [contactForm, setContactForm] = useState({
     firstName: '',
     lastName: '',
@@ -268,14 +262,6 @@ const Home = () => {
     message: ''
   });
   
-  const carouselImages = [
-    '/kfma/12f29b_031041a90ff34c618133bce229fddbd5~mv2.avif',
-    '/kfma/12f29b_05614dcb336e46888a42d5612ef59298~mv2.avif',
-    '/kfma/12f29b_16d3aa9f3e5546de91424e3920b5c2d4~mv2.avif',
-    '/kfma/12f29b_2c05c65d13484f8f8cb6e8194836e779~mv2.avif',
-    '/kfma/12f29b_8e2e21531b4c44159623c85341779884~mv2.avif'
-  ];
-
   // Refs for sections
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -389,13 +375,6 @@ const Home = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
-
-  const handleContactFormChange = (field: string, value: string) => {
-    setContactForm(prev => ({
-      ...prev,
-      [field]: value
-    }));
   };
 
   const handleContactSubmit = () => {
@@ -793,6 +772,9 @@ const Home = () => {
               </MasterCard>
             </Grid>
           </Grid>
+        </Container>
+      </Box>
+
       {/* Training Information Section */}
       <Box
         ref={trainingRef}
@@ -1718,161 +1700,162 @@ const Home = () => {
           <ArrowUpIcon />
         </Fab>
       )}
-        <Dialog
-          open={contactModalOpen}
-          onClose={() => setContactModalOpen(false)}
-          maxWidth="sm"
-          fullWidth
-        >
-          <DialogTitle sx={{
-            backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#f8f8f8',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderBottom: '2px solid #EA0707'
-          }}>
-            <Typography variant="h5" sx={{ fontFamily: 'Roboto, sans-serif', fontWeight: 'bold', color: '#EA0707' }}>
-              Start Your KFMA Journey
-            </Typography>
-            <IconButton onClick={() => setContactModalOpen(false)}>
-              <CloseIcon />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent sx={{
-            backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#fff',
-            pt: 3
-          }}>
-            <Typography variant="body1" sx={{ mb: 3, fontFamily: 'Roboto, sans-serif' }}>
-              Ready to begin your martial arts journey? Fill out the form below and we'll get back to you soon!
-            </Typography>
-            <Grid container >
-              <Grid xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="First Name"
-                  value={contactForm.firstName}
-                  onChange={(e) => handleFormChange('firstName', e.target.value)}
-                  required
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#EA0707',
-                      },
+
+      {/* Contact Modal Dialog */}
+      <Dialog
+        open={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{
+          backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#f8f8f8',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '2px solid #EA0707'
+        }}>
+          <Typography variant="h5" sx={{ fontFamily: 'Roboto, sans-serif', fontWeight: 'bold', color: '#EA0707' }}>
+            Start Your KFMA Journey
+          </Typography>
+          <IconButton onClick={() => setContactModalOpen(false)}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent sx={{
+          backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#fff',
+          pt: 3
+        }}>
+          <Typography variant="body1" sx={{ mb: 3, fontFamily: 'Roboto, sans-serif' }}>
+            Ready to begin your martial arts journey? Fill out the form below and we'll get back to you soon!
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="First Name"
+                value={contactForm.firstName}
+                onChange={(e) => handleFormChange('firstName', e.target.value)}
+                required
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#EA0707',
                     },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#EA0707',
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Last Name"
-                  value={contactForm.lastName}
-                  onChange={(e) => handleFormChange('lastName', e.target.value)}
-                  required
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#EA0707',
-                      },
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#EA0707',
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid xs={12}>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  type="email"
-                  value={contactForm.email}
-                  onChange={(e) => handleFormChange('email', e.target.value)}
-                  required
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#EA0707',
-                      },
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#EA0707',
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid xs={12}>
-                <TextField
-                  fullWidth
-                  label="Phone"
-                  type="tel"
-                  value={contactForm.phone}
-                  onChange={(e) => handleFormChange('phone', e.target.value)}
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#EA0707',
-                      },
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#EA0707',
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid xs={12}>
-                <TextField
-                  fullWidth
-                  label="How can KFMA help you?"
-                  multiline
-                  rows={4}
-                  value={contactForm.message}
-                  onChange={(e) => handleFormChange('message', e.target.value)}
-                  placeholder="Tell us about your martial arts goals, experience level, or any questions you have..."
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: '#EA0707',
-                      },
-                    },
-                    '& .MuiInputLabel-root.Mui-focused': {
-                      color: '#EA0707',
-                    },
-                  }}
-                />
-              </Grid>
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#EA0707',
+                  },
+                }}
+              />
             </Grid>
-          </DialogContent>
-          <DialogActions sx={{
-            backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#f8f8f8',
-            p: 3,
-            borderTop: '1px solid #ddd'
-          }}>
-            <Button
-              onClick={() => setContactModalOpen(false)}
-              sx={{ fontFamily: 'Roboto, sans-serif' }}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleContactSubmit}
-              variant="contained"
-              disabled={!contactForm.firstName || !contactForm.lastName || !contactForm.email}
-              sx={{
-                backgroundColor: '#EA0707',
-                fontFamily: 'Roboto, sans-serif',
-                '&:hover': { backgroundColor: '#c20606' },
-                '&:disabled': { backgroundColor: '#ccc' }
-              }}
-            >
-              Submit
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Container>
+            <Grid xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label="Last Name"
+                value={contactForm.lastName}
+                onChange={(e) => handleFormChange('lastName', e.target.value)}
+                required
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#EA0707',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#EA0707',
+                  },
+                }}
+              />
+            </Grid>
+            <Grid xs={12}>
+              <TextField
+                fullWidth
+                label="Email"
+                type="email"
+                value={contactForm.email}
+                onChange={(e) => handleFormChange('email', e.target.value)}
+                required
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#EA0707',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#EA0707',
+                  },
+                }}
+              />
+            </Grid>
+            <Grid xs={12}>
+              <TextField
+                fullWidth
+                label="Phone"
+                type="tel"
+                value={contactForm.phone}
+                onChange={(e) => handleFormChange('phone', e.target.value)}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#EA0707',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#EA0707',
+                  },
+                }}
+              />
+            </Grid>
+            <Grid xs={12}>
+              <TextField
+                fullWidth
+                label="How can KFMA help you?"
+                multiline
+                rows={4}
+                value={contactForm.message}
+                onChange={(e) => handleFormChange('message', e.target.value)}
+                placeholder="Tell us about your martial arts goals, experience level, or any questions you have..."
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#EA0707',
+                    },
+                  },
+                  '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#EA0707',
+                  },
+                }}
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions sx={{
+          backgroundColor: theme.palette.mode === 'dark' ? '#2d2d2d' : '#f8f8f8',
+          p: 3,
+          borderTop: '1px solid #ddd'
+        }}>
+          <Button
+            onClick={() => setContactModalOpen(false)}
+            sx={{ fontFamily: 'Roboto, sans-serif' }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleContactSubmit}
+            variant="contained"
+            disabled={!contactForm.firstName || !contactForm.lastName || !contactForm.email}
+            sx={{
+              backgroundColor: '#EA0707',
+              fontFamily: 'Roboto, sans-serif',
+              '&:hover': { backgroundColor: '#c20606' },
+              '&:disabled': { backgroundColor: '#ccc' }
+            }}
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
