@@ -1556,7 +1556,565 @@ const Home: React.FC = () => {
         </Container>
       </Box>
 
-      {/* Award-Winning Excellence Section */}
+      {/* 2025 Grading Results Section */}
+      <Box sx={{ py: 10, backgroundColor: '#ffffff', position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '4rem' },
+                  fontWeight: 300,
+                  color: colorPalette.primary,
+                  mb: 4,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                2025 April{' '}
+                <Box component="span" sx={{ color: colorPalette.black }}>Grading Results</Box>
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Card sx={{ p: 4, backgroundColor: alpha(colorPalette.primary, 0.05), border: `2px solid ${alpha(colorPalette.primary, 0.2)}` }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      color: colorPalette.primary,
+                      fontWeight: 600,
+                      mb: 3,
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    TAEKWONDO
+                  </Typography>
+                  
+                  <Stack spacing={2}>
+                    <Box>
+                      <Typography sx={{ fontWeight: 600, color: colorPalette.black, mb: 1 }}>
+                        3rd Gup - Red/White Belt
+                      </Typography>
+                      <Typography sx={{ color: colorPalette.mediumGray }}>
+                        Brooke - Honours
+                      </Typography>
+                    </Box>
+                    
+                    <Box>
+                      <Typography sx={{ fontWeight: 600, color: colorPalette.black, mb: 1 }}>
+                        5th Gup - Blue Belt
+                      </Typography>
+                      <Typography sx={{ color: colorPalette.mediumGray }}>
+                        Scarlett - Honours<br />
+                        Dani - Honours
+                      </Typography>
+                    </Box>
+                    
+                    <Box>
+                      <Typography sx={{ fontWeight: 600, color: colorPalette.black, mb: 1 }}>
+                        6th Gup - Blue/Black Belt
+                      </Typography>
+                      <Typography sx={{ color: colorPalette.mediumGray }}>
+                        Alexanda - Honours
+                      </Typography>
+                    </Box>
+                    
+                    <Box>
+                      <Typography sx={{ fontWeight: 600, color: colorPalette.black, mb: 1 }}>
+                        8th Gup - Yellow Belt
+                      </Typography>
+                      <Typography sx={{ color: colorPalette.mediumGray }}>
+                        Aria - High Pass<br />
+                        Zara - Honours
+                      </Typography>
+                    </Box>
+                    
+                    <Box>
+                      <Typography sx={{ fontWeight: 600, color: colorPalette.black, mb: 1 }}>
+                        9th Gup - Yellow/White Belt
+                      </Typography>
+                      <Typography sx={{ color: colorPalette.mediumGray }}>
+                        Sam - Honours<br />
+                        Joe - Honours<br />
+                        Charlotte - Pass
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </Card>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  The first KFMA grading for 2025 was held on 3rd April. This was a challenging grading 
+                  as we had a disruption to our training due to the weather event in March. We had to delay 
+                  the grading to allow students more time to train and prepare.
+                </Typography>
+                
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  Leading up to the grading, we focused on the importance of etiquette and basic techniques. 
+                  We had 9 students approved to grade, some of which were higher ranks that were required to 
+                  demonstrate advanced techniques and terminology. Overall, I saw students have worked hard 
+                  in the lead up to the grading and the standard of basics, etiquette and terminology was high.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  With our first grading now behind us, we have just 4 weeks to prepare for our first 
+                  competition as Team KFMA. We have students competing in poomsae, sparring and speed 
+                  kicking events at the Gold Coast Open.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                    fontStyle: 'italic',
+                  }}
+                >
+                  I encourage all students to practice at home and work on the basic skills we learn in 
+                  class - this is the foundation of everything we do and helps to consolidate your learning 
+                  and improves your skills.
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: colorPalette.primary,
+                    fontWeight: 600,
+                    textAlign: 'right',
+                  }}
+                >
+                  Well done everyone!<br />
+                  Master Mark
+                </Typography>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Caboolture Open 2025 Section */}
+      <Box sx={{ py: 10, backgroundColor: colorPalette.veryLightGray, position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '4rem' },
+                  fontWeight: 300,
+                  color: colorPalette.black,
+                  mb: 2,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Caboolture Open{' '}
+                <Box component="span" sx={{ color: colorPalette.primary }}>2025</Box>
+              </Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontWeight: 600,
+                  color: colorPalette.gold,
+                  mb: 4,
+                }}
+              >
+                Again KFMA brought home 5 gold medals from 5 players! 100% Gold!
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  On the 22nd June 2025, Team KFMA headed to the Caboolture Open at Morayfield. 
+                  This year marked the 20 year anniversary of this event, and this was Team KFMA's 
+                  second competition, so expectations were very high.
+                </Typography>
+                
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  The KFMA team consisted of students who had competed before and one competitor who 
+                  returns to the mats after a 2-year break. We had 5 players enter individual poomsae 
+                  events with only 2 weeks preparation due to my trip to Korea and Japan.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  Whilst I was away, competing students were set the task to train at home. Prior to 
+                  going away I provided specific feedback to competing students to help them improve. 
+                  When I returned, we refined the patterns even further.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  Scoring at this event was much tougher than the Gold Coast Open, but Team KFMA still 
+                  brought home Gold Medals for each event.
+                </Typography>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Card sx={{ p: 4, backgroundColor: colorPalette.gold, color: colorPalette.black }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: 600,
+                      mb: 3,
+                      textAlign: 'center',
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    🏆 Players Results 🏆
+                  </Typography>
+                  
+                  <Stack spacing={2}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.black, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Brooke</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.black, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Elizabeth</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.black, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Dani</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.black, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Aria</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1 }}>
+                      <Typography sx={{ fontWeight: 600 }}>Alexanda</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>Gold</Typography>
+                    </Box>
+                  </Stack>
+                </Card>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mt: 4,
+                    fontStyle: 'italic',
+                  }}
+                >
+                  It was pleasing to see the level of skill and etiquette my students displayed at this event. 
+                  As with the Gold Coast Open, you all stood out - in the best way possible. Thank you, Team KFMA, 
+                  for the extra effort and making me proud.
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: colorPalette.primary,
+                    fontWeight: 600,
+                    textAlign: 'right',
+                    mt: 2,
+                  }}
+                >
+                  Master Mark
+                </Typography>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Gold Coast Open 2025 Section */}
+      <Box sx={{ py: 10, backgroundColor: '#ffffff', position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '4rem' },
+                  fontWeight: 300,
+                  color: colorPalette.black,
+                  mb: 2,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Gold Coast Open{' '}
+                <Box component="span" sx={{ color: colorPalette.primary }}>2025</Box>
+              </Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: { xs: '1.25rem', md: '1.5rem' },
+                  fontWeight: 600,
+                  color: colorPalette.gold,
+                  mb: 4,
+                }}
+              >
+                KFMA had 5 gold medals from 5 players bringing home 100% Gold!
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Card sx={{ p: 4, backgroundColor: alpha(colorPalette.gold, 0.1), border: `2px solid ${colorPalette.gold}` }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      color: colorPalette.primary,
+                      fontWeight: 600,
+                      mb: 3,
+                      textAlign: 'center',
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    🥇 Poomsae Results 🥇
+                  </Typography>
+                  
+                  <Stack spacing={2}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.primary, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Brooke</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>6.13 Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.primary, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Alexanda</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>6.00 Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.primary, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Zara</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>5.89 Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: `1px solid ${alpha(colorPalette.primary, 0.2)}` }}>
+                      <Typography sx={{ fontWeight: 600 }}>Sam</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>5.40 Gold</Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1 }}>
+                      <Typography sx={{ fontWeight: 600 }}>Dani</Typography>
+                      <Typography sx={{ fontWeight: 700, color: colorPalette.primary }}>4.98 Gold</Typography>
+                    </Box>
+                  </Stack>
+                </Card>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  On the 4th May 2025, KFMA headed to the Cararra Indoor Stadium for the Annual Gold Coast Open. 
+                  This is the first time KFMA have competed as a team, and we had 5 players enter - 2 in sparring 
+                  and 5 in poomsae events. We trained hard for this over the last couple of months including extra 
+                  Saturday training.
+                </Typography>
+                
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  Alexanda sparred in 2 rounds, and he did well for his age given he fought an experienced 8-year-old. 
+                  Zara sparred 2 rounds against a higher rank with a close first round. In the second round she hurt 
+                  her arm, but continued to push on, bringing home the silver.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  5 players entered individual poomsae events and the scores were very high - showing they have 
+                  practiced at home and taken on my feedback during class, putting this into action.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.darkGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                    fontStyle: 'italic',
+                  }}
+                >
+                  I saw all of my students display exceptional etiquette today, not only during their time on the mats, 
+                  but in general, and this is great to see. Good etiquette is what sets KFMA apart so well done everyone!
+                </Typography>
+
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: colorPalette.primary,
+                    fontWeight: 600,
+                    textAlign: 'right',
+                  }}
+                >
+                  Master Mark
+                </Typography>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Gallery Section */}
+      <Box sx={{ py: 10, backgroundColor: colorPalette.veryLightGray, position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontWeight: 300,
+                  color: colorPalette.black,
+                  mb: 4,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Korean Freestyle Martial Arts{' '}
+                <Box component="span" sx={{ color: colorPalette.primary }}>Gallery</Box>
+              </Typography>
+              
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
+                  fontWeight: 300,
+                  color: colorPalette.mediumGray,
+                  lineHeight: 1.6,
+                  maxWidth: '600px',
+                  mx: 'auto',
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                There is no better way to communicate what we do than through images. As you browse our site, 
+                take a few moments to let your eyes linger here, and get a feel for the Korean Freestyle Martial Arts signature touch.
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+
+          <Grid container spacing={3}>
+            {[
+              '/public/kfma/12f29b_031041a90ff34c618133bce229fddbd5~mv2_002.avif',
+              '/public/kfma/12f29b_05614dcb336e46888a42d5612ef59298~mv2_002.avif',
+              '/public/kfma/12f29b_16d3aa9f3e5546de91424e3920b5c2d4~mv2_002.avif',
+              '/public/kfma/6442710547835271098_edited_edited.jpg',
+              '/public/kfma/11062b_eb537e20e9a443138bef8c8395dee5cb~mv2_002.avif',
+              '/public/kfma/result_img_2024_12_26_08_18_23.jpg'
+            ].map((image, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <RevealOnScroll delay={index * 100}>
+                  <Box
+                    sx={{
+                      borderRadius: 2,
+                      overflow: 'hidden',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                      transition: 'transform 0.3s ease',
+                      '&:hover': {
+                        transform: 'scale(1.05)',
+                      },
+                    }}
+                  >
+                    <Box
+                      component="img"
+                      src={image}
+                      alt={`KFMA Training ${index + 1}`}
+                      sx={{
+                        width: '100%',
+                        height: 250,
+                        objectFit: 'cover',
+                        display: 'block',
+                      }}
+                    />
+                  </Box>
+                </RevealOnScroll>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Student Testimonials Section */}
       <Box sx={{ py: 10, backgroundColor: '#ffffff', position: 'relative', zIndex: 5 }}>
         <Container maxWidth="xl">
           <Grid container spacing={8} alignItems="center">
@@ -1574,7 +2132,7 @@ const Home: React.FC = () => {
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
                 >
-                  Recognition & Awards
+                  Student Success
                 </Typography>
                 <Typography
                   variant="h2"
@@ -1587,8 +2145,8 @@ const Home: React.FC = () => {
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
                 >
-                  Award-Winning{' '}
-                  <Box component="span" sx={{ color: colorPalette.primary }}>Excellence</Box>
+                  What Our Students{' '}
+                  <Box component="span" sx={{ color: colorPalette.primary }}>Say</Box>
                 </Typography>
                 <Typography
                   variant="body1"
