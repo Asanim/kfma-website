@@ -43,6 +43,8 @@ import {
   SportsMartialArts,
   Star,
   Timeline,
+  PhotoLibrary,
+  FormatQuote,
 } from '@mui/icons-material';
 import { keyframes } from '@mui/system';
 
@@ -2163,193 +2165,161 @@ const Home: React.FC = () => {
                   and the life-changing benefits of training at Korean Freestyle Martial Arts.
                 </Typography>
                 
-                <Stack spacing={3}>
-                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
-                    <Avatar
-                      sx={{
-                        backgroundColor: alpha(colorPalette.primary, 0.1),
-                        color: colorPalette.primary,
-                        width: 48,
-                        height: 48,
-                      }}
-                    >
-                      <EmojiEvents />
-                    </Avatar>
-                    <Box>
-                      <Typography 
-                        sx={{ 
-                          color: colorPalette.black, 
-                          fontWeight: 600, 
-                          mb: 0.5,
-                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
-                        }}
-                      >
-                        Synaco Safety Innovation Award
-                      </Typography>
-                      <Typography 
-                        sx={{ 
-                          color: colorPalette.mediumGray, 
-                          fontSize: '0.875rem',
-                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
-                          fontWeight: 300,
-                        }}
-                      >
-                        Recognized for breakthrough safety technology advancement
-                      </Typography>
-                    </Box>
-                  </Box>
+                <Card
+                  sx={{
+                    p: 4,
+                    backgroundColor: alpha(colorPalette.primary, 0.05),
+                    border: `2px solid ${alpha(colorPalette.primary, 0.1)}`,
+                    borderRadius: 2,
+                    position: 'relative',
+                  }}
+                >
+                  <FormatQuote 
+                    sx={{ 
+                      fontSize: '3rem', 
+                      color: alpha(colorPalette.primary, 0.3),
+                      position: 'absolute',
+                      top: 15,
+                      left: 20,
+                    }} 
+                  />
                   
-                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
-                    <Avatar
-                      sx={{
-                        backgroundColor: alpha(colorPalette.success, 0.1),
-                        color: colorPalette.success,
-                        width: 48,
-                        height: 48,
-                      }}
-                    >
-                      <EmojiEvents />
-                    </Avatar>
-                    <Box>
-                      <Typography 
-                        sx={{ 
-                          color: colorPalette.black, 
-                          fontWeight: 600, 
-                          mb: 0.5,
-                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
-                        }}
-                      >
-                        Safe Work and Return to Work Awards
-                      </Typography>
-                      <Typography 
-                        sx={{ 
-                          color: colorPalette.mediumGray, 
-                          fontSize: '0.875rem',
-                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
-                          fontWeight: 300,
-                        }}
-                      >
-                        Best solution to an identified work health and safety issue
-                      </Typography>
-                    </Box>
-                  </Box>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontSize: '1.25rem',
+                      fontWeight: 300,
+                      color: colorPalette.darkGray,
+                      lineHeight: 1.6,
+                      mb: 3,
+                      mt: 2,
+                      fontStyle: 'italic',
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    "KFMA is great! Master Mark is an excellent instructor who creates a supportive 
+                    and challenging environment for all students. The training has improved my fitness, 
+                    confidence, and discipline. I highly recommend KFMA to anyone looking to start 
+                    their martial arts journey."
+                  </Typography>
                   
-                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Avatar
                       sx={{
-                        backgroundColor: alpha(colorPalette.warning, 0.1),
-                        color: colorPalette.warning,
-                        width: 48,
-                        height: 48,
+                        width: 50,
+                        height: 50,
+                        backgroundColor: colorPalette.primary,
+                        fontSize: '1.25rem',
+                        fontWeight: 600,
                       }}
                     >
-                      <CheckCircle />
+                      K
                     </Avatar>
                     <Box>
-                      <Typography 
-                        sx={{ 
-                          color: colorPalette.black, 
-                          fontWeight: 600, 
+                      <Typography
+                        sx={{
+                          fontWeight: 600,
+                          color: colorPalette.black,
+                          fontSize: '1rem',
                           mb: 0.5,
-                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                         }}
                       >
-                        Australian Made Campaign Member
+                        KFMA Student
                       </Typography>
-                      <Typography 
-                        sx={{ 
-                          color: colorPalette.mediumGray, 
+                      <Typography
+                        sx={{
+                          color: colorPalette.mediumGray,
                           fontSize: '0.875rem',
-                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
-                          fontWeight: 300,
                         }}
                       >
-                        Proudly supporting local manufacturing and innovation
+                        Taekwondo & Hapkido Training
                       </Typography>
                     </Box>
                   </Box>
-                </Stack>
+                </Card>
               </RevealOnScroll>
             </Grid>
             
             <Grid item xs={12} md={6}>
               <RevealOnScroll>
-                <Grid container spacing={3}>
-                  <Grid item xs={6}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      borderRadius: 2,
+                      overflow: 'hidden',
+                      boxShadow: `0 8px 32px ${alpha(colorPalette.black, 0.15)}`,
+                      mb: 4,
+                      transform: 'rotate(-1deg)',
+                      transition: 'transform 0.3s ease',
+                      '&:hover': {
+                        transform: 'rotate(0deg) scale(1.02)',
+                      },
+                    }}
+                  >
                     <Box
+                      component="img"
+                      src="/public/kfma/12f29b_765382ecc924426c917b311474b1aefe~mv2.avif"
+                      alt="KFMA Students Training"
                       sx={{
-                        position: 'relative',
-                        borderRadius: 0,
-                        overflow: 'hidden',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                        transform: 'rotate(-2deg)',
-                        transition: 'transform 0.3s ease',
-                        '&:hover': {
-                          transform: 'rotate(0deg) scale(1.05)',
-                        },
+                        width: '100%',
+                        height: 300,
+                        objectFit: 'cover',
+                        display: 'block',
                       }}
-                    >
-                      <Box
-                        component="img"
-                        src="/prm-engineering/PRM-Engineering-Services-Award-Cert.jpg"
-                        alt="Award Certificate"
-                        sx={{
-                          width: '100%',
-                          height: 'auto',
-                          display: 'block',
-                        }}
-                      />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Box
-                      sx={{
-                        position: 'relative',
-                        borderRadius: 0,
-                        overflow: 'hidden',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                        transform: 'rotate(2deg)',
-                        transition: 'transform 0.3s ease',
-                        '&:hover': {
-                          transform: 'rotate(0deg) scale(1.05)',
-                        },
-                      }}
-                    >
-                      <Box
-                        component="img"
-                        src="/prm-engineering/Australian-Made.jpg"
-                        alt="Australian Made"
-                        sx={{
-                          width: '100%',
-                          height: 'auto',
-                          display: 'block',
-                        }}
-                      />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Box
-                      sx={{
-                        position: 'relative',
-                        borderRadius: 0,
-                        overflow: 'hidden',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                        mt: 2,
-                      }}
-                    >
-                      <Box
-                        component="img"
-                        src="/prm-engineering/Synaco-Safety-Award-PRM-Engineering-Services1.jpg"
-                        alt="Safety Award"
-                        sx={{
-                          width: '100%',
-                          height: 'auto',
-                          display: 'block',
-                        }}
-                      />
-                    </Box>
-                  </Grid>
-                </Grid>
+                    />
+                  </Box>
+                  
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: colorPalette.primary,
+                      fontWeight: 600,
+                      mb: 2,
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    Join Our KFMA Family
+                  </Typography>
+                  
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: colorPalette.mediumGray,
+                      lineHeight: 1.6,
+                      mb: 3,
+                    }}
+                  >
+                    Experience the transformative power of traditional Korean martial arts. 
+                    Build confidence, discipline, and strength while being part of a supportive community.
+                  </Typography>
+
+                  <Button
+                    variant="contained"
+                    size="large"
+                    endIcon={<ArrowForward />}
+                    onClick={() => navigate('/free-trial')}
+                    sx={{
+                      background: colorPalette.primary,
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      px: 4,
+                      py: 2,
+                      borderRadius: 1,
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      boxShadow: 'none',
+                      '&:hover': {
+                        backgroundColor: colorPalette.primaryDark,
+                        transform: 'translateY(-2px)',
+                        boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                      },
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    Start Your Journey
+                  </Button>
+                </Box>
               </RevealOnScroll>
             </Grid>
           </Grid>
@@ -2688,6 +2658,257 @@ const Home: React.FC = () => {
               </Grid>
             </Box>
           </RevealOnScroll>
+        </Container>
+      </Box>
+
+      {/* Final Call-to-Action Hero Section */}
+      <Box
+        sx={{
+          minHeight: '60vh',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
+          zIndex: 5,
+        }}
+      >
+        {/* Background Image */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `url('/public/kfma/6442710547835271098_edited_edited.jpg') center/cover no-repeat`,
+            backgroundAttachment: 'fixed',
+            zIndex: 1,
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.8)} 0%, ${alpha(colorPalette.primary, 0.3)} 100%)`,
+            zIndex: 2,
+          }}
+        />
+
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3, textAlign: 'center' }}>
+          <RevealOnScroll>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
+                fontWeight: 300,
+                lineHeight: 1.1,
+                color: '#ffffff',
+                mb: 4,
+                fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+              }}
+            >
+              Ready to Begin Your
+              <Box component="span" sx={{ color: colorPalette.gold, fontWeight: 400 }}>
+                {' '}Martial Arts Journey?
+              </Box>
+            </Typography>
+            
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: { xs: '1.25rem', md: '1.5rem' },
+                fontWeight: 300,
+                color: colorPalette.lightGray,
+                lineHeight: 1.5,
+                mb: 6,
+                maxWidth: '800px',
+                mx: 'auto',
+                fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+              }}
+            >
+              Join KFMA today and discover the transformative power of traditional Korean martial arts. 
+              Build confidence, discipline, and strength while becoming part of our martial arts family.
+            </Typography>
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} justifyContent="center">
+              <Button
+                variant="contained"
+                size="large"
+                endIcon={<ArrowForward />}
+                onClick={() => navigate('/free-trial')}
+                sx={{
+                  background: colorPalette.primary,
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  px: 6,
+                  py: 3,
+                  borderRadius: 1,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  boxShadow: 'none',
+                  '&:hover': {
+                    backgroundColor: colorPalette.primaryDark,
+                    transform: 'translateY(-2px)',
+                    boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                Start Free Trial
+              </Button>
+              
+              <Button
+                variant="outlined"
+                size="large"
+                endIcon={<SportsMartialArts />}
+                onClick={() => navigate('/contact')}
+                sx={{
+                  borderColor: colorPalette.gold,
+                  color: colorPalette.gold,
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  px: 6,
+                  py: 3,
+                  borderRadius: 1,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  '&:hover': {
+                    backgroundColor: alpha(colorPalette.gold, 0.1),
+                    borderColor: colorPalette.gold,
+                    transform: 'translateY(-2px)',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                Contact Master Mark
+              </Button>
+            </Stack>
+          </RevealOnScroll>
+        </Container>
+      </Box>
+
+      {/* Footer/Additional Information Section */}
+      <Box sx={{ py: 8, backgroundColor: colorPalette.black, color: '#ffffff', position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={6}>
+            <Grid item xs={12} md={4}>
+              <RevealOnScroll>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 600,
+                    mb: 3,
+                    color: colorPalette.primary,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Korean Freestyle Martial Arts
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    lineHeight: 1.7,
+                    mb: 3,
+                    opacity: 0.9,
+                  }}
+                >
+                  KFMA is committed to Martial Arts excellence, blending traditional techniques and training methods 
+                  to empower people of all ages. Experience authentic Korean martial arts in a supportive, family-friendly environment.
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    opacity: 0.7,
+                  }}
+                >
+                  ABN: 19476656938
+                </Typography>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <RevealOnScroll>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    mb: 3,
+                    color: colorPalette.gold,
+                  }}
+                >
+                  Training Programs
+                </Typography>
+                <Stack spacing={1}>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Taekwondo (Traditional Korean Martial Art)</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Hapkido (Self-Defense System)</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Family Training Classes</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Competition Team Training</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Age Groups: 4 to 50+ Years</Typography>
+                </Stack>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <RevealOnScroll>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    mb: 3,
+                    color: colorPalette.gold,
+                  }}
+                >
+                  Get Started
+                </Typography>
+                <Stack spacing={1} sx={{ mb: 3 }}>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• 2-Week Free Trial Available</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Discounted Training Kit</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Complimentary First Grading</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• Flexible Monthly Payments</Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.9 }}>• No Long-Term Contracts Required</Typography>
+                </Stack>
+                
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => window.open('https://www.facebook.com/@korean.freestyle.martial.arts.24', '_blank')}
+                    sx={{
+                      backgroundColor: colorPalette.primary,
+                      minWidth: 'auto',
+                      px: 2,
+                    }}
+                  >
+                    Facebook
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => window.open('https://www.instagram.com/koreanfreestylema/', '_blank')}
+                    sx={{
+                      borderColor: '#ffffff',
+                      color: '#ffffff',
+                      minWidth: 'auto',
+                      px: 2,
+                    }}
+                  >
+                    Instagram
+                  </Button>
+                </Stack>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+          
+          <Box sx={{ textAlign: 'center', mt: 6, pt: 4, borderTop: `1px solid ${alpha('#ffffff', 0.2)}` }}>
+            <Typography variant="body2" sx={{ opacity: 0.7 }}>
+              © 2025 Korean Freestyle Martial Arts. All rights reserved. | Master Mark Buxton - 35+ Years Experience
+            </Typography>
+          </Box>
         </Container>
       </Box>
 
