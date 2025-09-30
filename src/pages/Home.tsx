@@ -1,60 +1,86 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
-  Typography,
   Container,
+  Typography,
+  Button,
   Grid,
   Card,
   CardContent,
-  Button,
   Chip,
-  useTheme,
-  Fade,
-  IconButton,
-  TextField,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Paper,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  CardMedia,
-  Fab,
-  AppBar,
-  Toolbar,
+  Avatar,
   Stack,
-  Avatar
+  alpha,
+  IconButton,
+  Dialog,
+  DialogContent,
+  DialogTitle,
 } from '@mui/material';
-import { styled, keyframes } from '@mui/material/styles';
 import {
-  Schedule as ScheduleIcon,
-  LocationOn as LocationIcon,
-  Email as EmailIcon,
-  Phone as PhoneIcon,
-  EmojiEvents as TrophyIcon,
-  ArrowBackIos,
-  ArrowForwardIos,
-  KeyboardArrowUp as ArrowUpIcon,
-  Close as CloseIcon,
-  Facebook as FacebookIcon,
-  Instagram as InstagramIcon,
-  YouTube as YouTubeIcon
+  Security,
+  Engineering,
+  Visibility,
+  ArrowForward,
+  Factory,
+  Construction,
+  Train,
+  LocalShipping,
+  PlayArrow,
+  Close,
+  Settings,
+  Business,
+  SmartToy,
+  Shield,
+  Insights,
+  EmojiEvents,
+  CheckCircle,
+  FitnessCenter,
+  Psychology,
+  Group,
+  School,
+  SportsKabaddi,
+  SportsMartialArts,
+  Star,
+  Timeline,
 } from '@mui/icons-material';
+import { keyframes } from '@mui/system';
 
-// Animations
+// KFMA brand colors inspired by Korean martial arts
+const colorPalette = {
+  // KFMA Brand Colors
+  primary: '#CC0000',        // Traditional Korean red
+  primaryLight: '#FF3333',   // Lighter red for accents
+  primaryDark: '#990000',    // Darker red for depth
+  
+  // Secondary Colors
+  secondary: '#000000',      // Black for contrast
+  gold: '#FFD700',          // Gold for achievements/belts
+  
+  // Modern Neutrals
+  black: '#000000',
+  charcoal: '#1A1A1A',
+  darkGray: '#333333',
+  mediumGray: '#666666',
+  lightGray: '#999999',
+  veryLightGray: '#F5F5F5',
+  white: '#FFFFFF',
+  
+  // Accent Colors
+  success: '#00C851',
+  warning: '#FF8800',
+  error: '#FF4444',
+  
+  // Gradients
+  primaryGradient: 'linear-gradient(135deg, #CC0000 0%, #990000 100%)',
+  heroGradient: 'linear-gradient(135deg, #000000 0%, #1A1A1A 50%, #333333 100%)',
+};
+
+// Subtle modern animations
 const fadeInUp = keyframes`
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -62,1191 +88,1817 @@ const fadeInUp = keyframes`
   }
 `;
 
-// KFMA Original Colors (matching kfma.com.au)
-const colors = {
-  primary: '#EA0707', // Original KFMA red
-  secondary: '#FFB000', // Gold
-  accent: '#648FFF', // Blue accent
-  dark: '#1A1A1A',
-  light: '#F8F9FA',
-  white: '#FFFFFF',
-  black: '#000000'
-};
-
-// Styled components with Korean aesthetics
-const FullScreenVideo = styled(Box)(() => ({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100vw',
-  height: '100vh',
-  zIndex: 9999,
-  backgroundColor: '#000',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  '& video': {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover'
+const slideInFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
   }
-}));
-
-const KoreanBackgroundContainer = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  height: '100vh',
-  overflow: 'hidden',
-  backgroundImage: 'url(/background/image.png)',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundAttachment: 'fixed',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: `linear-gradient(135deg, 
-      rgba(220, 38, 127, 0.8) 0%, 
-      rgba(26, 26, 26, 0.7) 50%, 
-      rgba(255, 176, 0, 0.6) 100%)`,
-    zIndex: 1
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-}));
+`;
 
-const HeroOverlay = styled(Box)(() => ({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  zIndex: 2,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  textAlign: 'center',
-  padding: '2rem'
-}));
-
-const ScrollNavigation = styled(AppBar)(({ theme }) => ({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  backgroundColor: 'rgba(26, 26, 26, 0.95)',
-  backdropFilter: 'blur(15px)',
-  zIndex: 1000,
-  height: '70px',
-  borderBottom: `2px solid ${koreanColors.primary}`,
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    bottom: 0,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '80px',
-    height: '3px',
-    background: `linear-gradient(90deg, ${koreanColors.secondary}, ${koreanColors.primary})`,
-    borderRadius: '2px'
+const slideInFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(30px);
   }
-}));
-
-const NavButton = styled(Button)(({ theme, active }: { theme: any; active?: boolean }) => ({
-  color: 'white',
-  margin: theme.spacing(0, 1.5),
-  textTransform: 'none',
-  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-  fontSize: '1rem',
-  fontWeight: active ? 600 : 400,
-  padding: theme.spacing(1, 2),
-  borderRadius: '25px',
-  backgroundColor: active ? koreanColors.primary : 'transparent',
-  border: active ? `1px solid ${koreanColors.secondary}` : '1px solid transparent',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    backgroundColor: active ? koreanColors.primary : `rgba(220, 38, 127, 0.2)`,
-    border: `1px solid ${koreanColors.secondary}`,
-    transform: 'translateY(-2px)'
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-}));
+`;
 
-const Section = styled(Box)(({ theme }) => ({
-  minHeight: '100vh',
-  padding: theme.spacing(10, 0),
-  scrollSnapAlign: 'start',
-  position: 'relative',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '4px',
-    background: `linear-gradient(90deg, transparent, ${koreanColors.primary}, transparent)`,
-    opacity: 0.6
+
+
+const counterAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-}));
-
-const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: 700,
-  marginBottom: theme.spacing(6),
-  color: koreanColors.primary,
-  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-  textAlign: 'center',
-  position: 'relative',
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    bottom: '-15px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '60px',
-    height: '3px',
-    background: `linear-gradient(90deg, ${koreanColors.secondary}, ${koreanColors.primary})`,
-    borderRadius: '2px'
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-}));
+`;
 
-const KoreanCard = styled(Card)(({ theme }) => ({
-  background: theme.palette.mode === 'dark' 
-    ? `linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(220, 38, 127, 0.1) 100%)`
-    : `linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(220, 38, 127, 0.05) 100%)`,
-  backdropFilter: 'blur(10px)',
-  border: `1px solid rgba(220, 38, 127, 0.3)`,
-  borderRadius: '16px',
-  boxShadow: `0 8px 32px rgba(220, 38, 127, 0.15)`,
-  transition: 'all 0.3s ease',
-  position: 'relative',
-  overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '3px',
-    background: `linear-gradient(90deg, ${koreanColors.secondary}, ${koreanColors.primary}, ${koreanColors.accent})`,
-  },
-  '&:hover': {
-    transform: 'translateY(-8px)',
-    boxShadow: `0 16px 48px rgba(220, 38, 127, 0.25)`,
-    animation: `${pulseGlow} 2s infinite`
-  }
-}));
+// Animated Counter Component
+const AnimatedCounter: React.FC<{
+  value: number;
+  suffix?: string;
+  duration?: number;
+  startDelay?: number;
+}> = ({ value, suffix = '', duration = 2000, startDelay = 0 }) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
 
-const StatCard = styled(KoreanCard)(({ theme }) => ({
-  height: '100%',
-  textAlign: 'center',
-  padding: theme.spacing(4),
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  '&:hover': {
-    '& .stat-number': {
-      color: koreanColors.secondary,
-      transform: 'scale(1.1)'
-    }
-  }
-}));
-
-const FeatureIcon = styled(Box)(({ theme }) => ({
-  width: '80px',
-  height: '80px',
-  borderRadius: '50%',
-  background: `linear-gradient(135deg, ${koreanColors.primary}, ${koreanColors.secondary})`,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginBottom: theme.spacing(2),
-  boxShadow: `0 8px 24px rgba(220, 38, 127, 0.3)`,
-  '& .MuiSvgIcon-root': {
-    fontSize: '2.5rem',
-    color: 'white'
-  }
-}));
-
-const ScrollToTopFab = styled(Fab)(({ theme }) => ({
-  position: 'fixed',
-  bottom: theme.spacing(3),
-  right: theme.spacing(3),
-  backgroundColor: koreanColors.primary,
-  color: 'white',
-  border: `2px solid ${koreanColors.secondary}`,
-  width: '60px',
-  height: '60px',
-  '&:hover': {
-    backgroundColor: koreanColors.secondary,
-    transform: 'scale(1.1)',
-    boxShadow: `0 8px 24px rgba(220, 38, 127, 0.4)`
-  }
-}));
-
-const Home = () => {
-  const theme = useTheme();
-  const [showVideo, setShowVideo] = useState(true);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [contactModalOpen, setContactModalOpen] = useState(false);
-  const [contactForm, setContactForm] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  
-  // Refs for sections
-  const heroRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const masterRef = useRef<HTMLDivElement>(null);
-  const trainingRef = useRef<HTMLDivElement>(null);
-  const pricingRef = useRef<HTMLDivElement>(null);
-  const successRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
-
-  const sections = [
-    { id: 'hero', label: 'Home', ref: heroRef },
-    { id: 'about', label: 'About', ref: aboutRef },
-    { id: 'master', label: 'Master', ref: masterRef },
-    { id: 'training', label: 'Training', ref: trainingRef },
-    { id: 'pricing', label: 'Pricing', ref: pricingRef },
-    { id: 'success', label: 'Success', ref: successRef },
-    { id: 'gallery', label: 'Gallery', ref: galleryRef },
-    { id: 'contact', label: 'Contact', ref: contactRef }
-  ];
-
-  // Auto-hide intro video after 3.5 seconds
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
     const timer = setTimeout(() => {
-      const videoContainer = document.querySelector('.fullscreen-video-container');
-      if (videoContainer) {
-        videoContainer.classList.add('fade-out');
-        setTimeout(() => setShowVideo(false), 1000);
-      }
-    }, 3500);
+      const increment = value / (duration / 50);
+      let currentCount = 0;
+
+      const counter = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= value) {
+          setCount(value);
+          clearInterval(counter);
+        } else {
+          setCount(Math.floor(currentCount));
+        }
+      }, 50);
+
+      return () => clearInterval(counter);
+    }, startDelay);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isVisible, value, duration, startDelay]);
 
-  // Scroll detection for active section and show scroll to top
+  return (
+    <Box
+      ref={elementRef}
+      sx={{
+        animation: isVisible ? `${counterAnimation} 0.8s ease-out` : 'none',
+      }}
+    >
+      {count}{suffix}
+    </Box>
+  );
+};
+
+// Reveal on Scroll Component
+const RevealOnScroll: React.FC<{
+  children: React.ReactNode;
+  delay?: number;
+  direction?: 'up' | 'left' | 'right';
+}> = ({ children, delay = 0, direction = 'up' }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setShowScrollTop(scrollPosition > 100);
-
-      // Determine active section
-      for (const section of sections) {
-        if (section.ref.current) {
-          const rect = section.ref.current.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section.id);
-            break;
-          }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setIsVisible(true), delay);
         }
-      }
-    };
+      },
+      { threshold: 0.1 }
+    );
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [sections]);
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
 
-  const scrollToSection = (sectionId: string) => {
-    const section = sections.find(s => s.id === sectionId);
-    if (section?.ref.current) {
-      section.ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+    return () => observer.disconnect();
+  }, [delay]);
+
+  const getAnimation = () => {
+    switch (direction) {
+      case 'left':
+        return slideInFromLeft;
+      case 'right':
+        return slideInFromRight;
+      default:
+        return fadeInUp;
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  return (
+    <Box
+      ref={elementRef}
+      sx={{
+        opacity: isVisible ? 1 : 0,
+        animation: isVisible ? `${getAnimation()} 0.8s ease-out` : 'none',
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
+const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // KFMA background images carousel
+  const backgroundImages = [
+    '/public/kfma/result_img_2024_12_26_08_18_23.jpg',
+    '/public/kfma/11062b_eb537e20e9a443138bef8c8395dee5cb~mv2.avif',
+    '/public/kfma/6442710547835271098_edited_edited.jpg',
+    '/background/taekwando/martial-arts-bg-1.jpg',
+    '/background/taekwando/martial-arts-bg-2.jpg',
+    '/background/taekwando/martial-arts-bg-3.jpg'
+  ];
+
+  // Auto-rotate background images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % backgroundImages.length
+      );
+    }, 6000); // Change image every 6 seconds
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
+
+  // KFMA Programs and Training Options
+  const programColors = {
+    'taekwondo': colorPalette.primary,     // Korean red
+    'hapkido': colorPalette.secondary,     // Black
+    'family': colorPalette.gold,           // Gold
+    'competition': colorPalette.primary    // Red
   };
 
-  const handleContactSubmit = () => {
-    console.log('Contact form submitted:', contactForm);
-    setContactForm({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      message: ''
-    });
-    setContactModalOpen(false);
-  };
+  const martialArtsPrograms = [
+    {
+      id: 'taekwondo',
+      title: 'Taekwondo Training',
+      subtitle: 'Traditional Korean Martial Art',
+      description: 'Master the art of striking and kicking techniques in our comprehensive Taekwondo program. Focus on patterns (poomsae), sparring, and self-defense while building confidence, discipline, and physical fitness. Suitable for all ages from 4 to 50+.',
+      icon: <SportsMartialArts />,
+      image: '/public/kfma/12f29b_031041a90ff34c618133bce229fddbd5~mv2.avif',
+      route: '/taekwondo',
+      featureColor: programColors['taekwondo']
+    },
+    {
+      id: 'hapkido',
+      title: 'Hapkido Training',
+      subtitle: 'Korean Self-Defense System',
+      description: 'Learn the comprehensive martial art that combines joint locks, throws, and strikes. Hapkido emphasizes redirecting opponent\'s force and using leverage over strength, making it effective for practitioners of all sizes.',
+      icon: <Shield />,
+      image: '/public/kfma/12f29b_05614dcb336e46888a42d5612ef59298~mv2.avif',
+      route: '/hapkido',
+      featureColor: programColors['hapkido']
+    },
+    {
+      id: 'family',
+      title: 'Family Training',
+      subtitle: 'Train Together, Grow Together',
+      description: 'Join our martial arts family and experience the joy of training with your loved ones. Many families are part of KFMA, enjoying the journey of growth and practice together. Discover the benefits of training with your children at KFMA.',
+      icon: <Group />,
+      image: '/public/kfma/6442710547835271098_edited_edited.jpg',
+      route: '/family-training',
+      featureColor: programColors['family']
+    },
+    {
+      id: 'competition',
+      title: 'Competition Team',
+      subtitle: '100% Gold Medal Success',
+      description: 'Join Team KFMA and compete at the highest levels. Our competition team has achieved 100% gold medal success in 2025 competitions including Gold Coast Open and Caboolture Open. Train with dedication and represent KFMA with pride.',
+      icon: <EmojiEvents />,
+      image: '/public/kfma/12f29b_16d3aa9f3e5546de91424e3920b5c2d4~mv2.avif',
+      route: '/competition-team',
+      featureColor: programColors['competition']
+    }
+  ];
 
-  const handleFormChange = (field: string, value: string) => {
-    setContactForm(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
+  // KFMA Training Benefits
+  const trainingBenefits = [
+    { title: 'Physical Fitness & Strength', icon: <FitnessCenter />, type: 'benefit' },
+    { title: 'Confidence & Self-Defense', icon: <Psychology />, type: 'benefit' },
+    { title: 'Discipline & Focus', icon: <School />, type: 'benefit' },
+    { title: 'Traditional Techniques & Values', icon: <Star />, type: 'benefit' }
+  ];
 
-  if (showVideo) {
-    return (
-      <FullScreenVideo className="fullscreen-video-container">
-        <video
-          autoPlay
-          muted
-          onEnded={() => {
-            const videoContainer = document.querySelector('.fullscreen-video-container');
-            if (videoContainer) {
-              videoContainer.classList.add('fade-out');
-              setTimeout(() => setShowVideo(false), 1000);
-            }
-          }}
-          onClick={() => {
-            const videoContainer = document.querySelector('.fullscreen-video-container');
-            if (videoContainer) {
-              videoContainer.classList.add('fade-out');
-              setTimeout(() => setShowVideo(false), 1000);
-            }
-          }}
-        >
-          <source src="/kfma/file.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </FullScreenVideo>
-    );
-  }
+  // KFMA Age Groups and Programs
+  const ageGroups = [
+    { name: 'Little Dragons', icon: <SportsKabaddi />, type: 'age-group', ages: '4-6 years' },
+    { name: 'Junior Warriors', icon: <SportsMartialArts />, type: 'age-group', ages: '7-12 years' },
+    { name: 'Teen Champions', icon: <EmojiEvents />, type: 'age-group', ages: '13-17 years' },
+    { name: 'Adult Masters', icon: <Psychology />, type: 'age-group', ages: '18-50+ years' },
+    { name: 'Family Classes', icon: <Group />, type: 'age-group', ages: 'All ages' },
+    { name: 'Competition Team', icon: <Star />, type: 'age-group', ages: 'Selected students' }
+  ];
+
+  // KFMA stats
+  const stats = [
+    { value: '35+', label: 'Years Experience', sublabel: 'Master Mark Buxton' },
+    { value: '100%', label: 'Gold Medals', sublabel: '2025 Competitions' },
+    { value: '4+', label: 'Age Range', sublabel: 'to 50+ welcome' },
+  ];
 
   return (
-    <Box sx={{
-      minHeight: '100vh',
-      backgroundColor: theme.palette.background.default,
-      fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-      position: 'relative'
-    }}>
-
-      {/* Korean-Inspired Navigation */}
-      <ScrollNavigation position="fixed">
-        <Toolbar sx={{ justifyContent: 'center', minHeight: '70px !important' }}>
-          {sections.map((section) => (
-            <NavButton
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              active={activeSection === section.id}
-            >
-              {section.label}
-            </NavButton>
-          ))}
-        </Toolbar>
-      </ScrollNavigation>
-
-      {/* Hero Section with Korean Architecture Background */}
+    <Box sx={{ overflow: 'hidden', background: colorPalette.white }}>
+      {/* Floating Featured Article */}
+      {/* <FloatingFeaturedArticle /> */}
+      
+      {/* Modern Hero Section with Carousel Background */}
       <Box
-        ref={heroRef}
-        id="hero"
         sx={{
           minHeight: '100vh',
-          scrollSnapAlign: 'start',
-          position: 'relative'
+          color: 'white',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
         }}
       >
-        <KoreanBackgroundContainer>
-          <HeroOverlay>
-            {/* Floating Logo */}
-            <Box sx={{ 
-              position: 'relative', 
-              mb: 4,
-              animation: `${fadeInUp} 1s ease-out`
-            }}>
-              <Avatar
-                src="/kfma/KFMA LOGO BLACK.png"
-                alt="KFMA Logo"
-                sx={{
-                  width: { xs: 120, md: 180 },
-                  height: { xs: 120, md: 180 },
-                  mb: 3,
-                  border: `4px solid ${koreanColors.secondary}`,
-                  boxShadow: `0 12px 40px rgba(220, 38, 127, 0.4)`,
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)'
-                }}
-              />
-            </Box>
-
-            {/* Main Title with Korean Typography Influence */}
-            <Typography
-              variant="h1"
-              component="h1"
-              sx={{
-                color: 'white',
-                fontWeight: 800,
-                textAlign: 'center',
-                fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                mb: 2,
-                fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
-                textShadow: '4px 4px 12px rgba(0,0,0,0.8)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.1,
-                animation: `${fadeInUp} 1.2s ease-out 0.3s both`
-              }}
-            >
-              한국 자유 무술
-            </Typography>
-
-            {/* English Title */}
-            <Typography
-              variant="h2"
-              component="h2"
-              sx={{
-                color: koreanColors.secondary,
-                fontWeight: 600,
-                textAlign: 'center',
-                fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                mb: 1,
-                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
-                textShadow: '2px 2px 8px rgba(0,0,0,0.8)',
-                animation: `${fadeInUp} 1.4s ease-out 0.5s both`
-              }}
-            >
-              Korean Freestyle Martial Arts
-            </Typography>
-
-            {/* Subtitle */}
-            <Stack
-              direction={{ xs: 'column', sm: 'row' }}
-              spacing={2}
-              alignItems="center"
-              sx={{ 
-                mb: 4,
-                animation: `${fadeInUp} 1.6s ease-out 0.7s both`
-              }}
-            >
-              <Chip
-                label="태권도 Taekwondo"
-                sx={{
-                  backgroundColor: koreanColors.primary,
-                  color: 'white',
-                  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                  fontSize: '1.1rem',
-                  padding: '8px 16px',
-                  fontWeight: 600,
-                  border: `2px solid ${koreanColors.secondary}`
-                }}
-              />
-              <Typography
-                variant="h5"
-                sx={{
-                  color: 'white',
-                  fontWeight: 300,
-                  fontFamily: '"Noto Sans KR", sans-serif',
-                  fontSize: { xs: '1.2rem', md: '1.5rem' }
-                }}
-              >
-                &
-              </Typography>
-              <Chip
-                label="합기도 Hapkido"
-                sx={{
-                  backgroundColor: koreanColors.accent,
-                  color: 'white',
-                  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                  fontSize: '1.1rem',
-                  padding: '8px 16px',
-                  fontWeight: 600,
-                  border: `2px solid ${koreanColors.secondary}`
-                }}
-              />
-            </Stack>
-
-            {/* ABN */}
-            <Typography
-              variant="body1"
-              sx={{
-                color: 'rgba(255, 255, 255, 0.8)',
-                textAlign: 'center',
-                fontFamily: '"Roboto", sans-serif',
-                fontSize: { xs: '0.9rem', md: '1.1rem' },
-                fontWeight: 300,
-                animation: `${fadeInUp} 1.8s ease-out 0.9s both`
-              }}
-            >
-              ABN: 19476656938
-            </Typography>
-
-            {/* Call to Action */}
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => scrollToSection('contact')}
-              sx={{
-                mt: 4,
-                backgroundColor: koreanColors.secondary,
-                color: koreanColors.dark,
-                fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                fontSize: '1.2rem',
-                fontWeight: 700,
-                padding: '12px 36px',
-                borderRadius: '30px',
-                border: `2px solid ${koreanColors.primary}`,
-                textTransform: 'none',
-                animation: `${fadeInUp} 2s ease-out 1.1s both`,
-                '&:hover': {
-                  backgroundColor: koreanColors.primary,
-                  color: 'white',
-                  transform: 'translateY(-4px)',
-                  boxShadow: `0 12px 32px rgba(220, 38, 127, 0.4)`
-                }
-              }}
-            >
-              무료 체험 시작하기 Start Free Trial
-            </Button>
-          </HeroOverlay>
-        </KoreanBackgroundContainer>
-      </Box>
-
-      {/* About KFMA Section */}
-      <Section
-        ref={aboutRef}
-        id="about"
-        sx={{
-          backgroundImage: 'url(/background/taekwando/image.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          '&::before': {
-            content: '""',
+        {/* Carousel Background Images */}
+        {backgroundImages.map((image, index) => (
+          <Box
+            key={index}
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: `url('${image}') center/cover no-repeat`,
+              backgroundAttachment: 'fixed',
+              opacity: index === currentImageIndex ? 1 : 0,
+              transition: 'opacity 2s ease-in-out',
+              zIndex: 1,
+            }}
+          />
+        ))}
+        
+        {/* Dark Overlay */}
+        <Box
+          sx={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            background: theme.palette.mode === 'dark' 
-              ? 'rgba(26, 26, 26, 0.85)' 
-              : 'rgba(248, 246, 240, 0.9)',
-            zIndex: 1
-          }
-        }}
-      >
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <SectionTitle variant="h2">
-            무술의 길 - About Korean Freestyle Martial Arts
-          </SectionTitle>
+            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.8)} 25%, ${alpha(colorPalette.charcoal, 0)} 100%)`,
+            zIndex: 2,
+          }}
+        />
 
-          <KoreanCard sx={{ mb: 6 }}>
-            <CardContent sx={{ padding: 4 }}>
-              <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
-                <FeatureIcon>
-                  <MeditationIcon />
-                </FeatureIcon>
-                <Box>
-                  <Typography
-                    variant="h5"
+        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 4 }}>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={12} lg={8}>
+
+              {/* KFMA credentials */}
+              <RevealOnScroll delay={200}>
+                <Stack direction="row" spacing={2} sx={{ mb: 4, flexWrap: 'wrap' }}>
+                  <Chip
+                    label="TAEKWONDO & HAPKIDO"
+                    size="small"
                     sx={{
-                      color: koreanColors.primary,
-                      fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                      fontWeight: 700,
-                      mb: 1
+                      background: colorPalette.primaryGradient,
+                      color: 'white',
+                      fontWeight: 600,
+                      fontSize: '0.75rem',
+                      letterSpacing: '1px',
+                      mb: 1,
                     }}
-                  >
-                    정신력과 신체의 조화 - Mind & Body Harmony
-                  </Typography>
-                  <Typography
-                    variant="body2"
+                  />
+                  <Chip
+                    label="ABN: 19476656938"
+                    size="small"
                     sx={{
-                      color: 'text.secondary',
-                      fontFamily: '"Roboto", sans-serif'
+                      backgroundColor: 'transparent',
+                      color: colorPalette.primary,
+                      border: `1px solid ${colorPalette.primary}`,
+                      fontWeight: 600,
+                      fontSize: '0.75rem',
+                      letterSpacing: '1px',
+                      mb: 1,
                     }}
-                  >
-                    ABN: 19476656938
-                  </Typography>
+                  />
+                </Stack>
+              </RevealOnScroll>
+
+              {/* Large, clean headline */}
+              <RevealOnScroll delay={400}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '3rem', sm: '4rem', md: '5rem', lg: '6rem' },
+                    fontWeight: 300,
+                    lineHeight: { xs: 1.1, md: 1.0 },
+                    letterSpacing: '-0.02em',
+                    mb: 4,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Welcome to
+                  <br />
+                  <Box component="span" sx={{ color: colorPalette.primary, fontWeight: 400 }}>
+                    Korean Freestyle
+                  </Box>
+                  <br />
+                  Martial Arts
+                </Typography>
+              </RevealOnScroll>
+
+              {/* KFMA value proposition */}
+              <RevealOnScroll delay={600}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontWeight: 300,
+                    color: colorPalette.lightGray,
+                    lineHeight: 1.5,
+                    mb: 6,
+                    maxWidth: '700px',
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  At KFMA, we are dedicated to providing exceptional training in Taekwondo & Hapkido. 
+                  KFMA is committed to Martial Arts excellence, blending traditional techniques and training methods 
+                  to empower people of all ages. Our experienced Master Instructor believes that confidence, 
+                  discipline, perseverance and strength are the core values of an outstanding Martial Arts School.
+                </Typography>
+              </RevealOnScroll>
+
+              {/* Single, prominent CTA */}
+              <RevealOnScroll delay={800}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<ArrowForward />}
+                  onClick={() => navigate('/contact')}
+                  sx={{
+                    background: colorPalette.primary,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    px: 6,
+                    py: 2.5,
+                    borderRadius: 1,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    boxShadow: 'none',
+                    '&:hover': {
+                      backgroundColor: colorPalette.primaryDark,
+                      transform: 'translateY(-2px)',
+                      boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} lg={4}>
+              {/* Clean stats display */}
+              <RevealOnScroll delay={600} direction="right">
+                <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
+                  {stats.map((stat, index) => (
+                    <Box key={index} sx={{ mb: 4 }}>
+                      <Typography
+                        variant="h2"
+                        sx={{
+                          fontSize: '4rem',
+                          fontWeight: 300,
+                          color: colorPalette.primary,
+                          lineHeight: 1,
+                          mb: 0.5,
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                        }}
+                      >
+                        <AnimatedCounter 
+                          value={parseInt(stat.value.replace(/\D/g, ''))} 
+                          suffix={stat.value.replace(/[0-9]/g, '')}
+                          startDelay={index * 200}
+                        />
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          color: 'white',
+                          fontWeight: 600,
+                          fontSize: '1rem',
+                          mb: 0.25,
+                        }}
+                      >
+                        {stat.label}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: colorPalette.lightGray,
+                          fontSize: '0.875rem',
+                        }}
+                      >
+                        {stat.sublabel}
+                      </Typography>
+                    </Box>
+                  ))}
                 </Box>
-              </Stack>
-
-              <Divider sx={{ mb: 4, background: `linear-gradient(90deg, ${koreanColors.primary}, ${koreanColors.secondary})`, height: '2px' }} />
-
-              <Typography
-                variant="body1"
-                sx={{
-                  textAlign: 'justify',
-                  mb: 3,
-                  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  color: 'text.primary'
-                }}
-              >
-                Welcome to Korean Freestyle Martial Arts. At KFMA, we are dedicated to providing exceptional training in 
-                <strong style={{ color: koreanColors.primary }}> 태권도 Taekwondo</strong> & <strong style={{ color: koreanColors.accent }}>합기도 Hapkido</strong>. 
-                KFMA is committed to Martial Arts excellence, blending traditional Korean techniques and training methods to empower people of all ages.
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={{
-                  textAlign: 'justify',
-                  mb: 3,
-                  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  color: 'text.primary'
-                }}
-              >
-                Our experienced Master Instructor believes that <strong style={{ color: koreanColors.primary }}>자신감 confidence</strong>, 
-                <strong style={{ color: koreanColors.primary }}> 규율 discipline</strong>, 
-                <strong style={{ color: koreanColors.primary }}> 인내 perseverance</strong> and 
-                <strong style={{ color: koreanColors.primary }}> 힘 strength</strong> are the core values of an outstanding Martial Arts School.
-              </Typography>
-
-              <Typography
-                variant="body1"
-                sx={{
-                  textAlign: 'justify',
-                  fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  color: 'text.primary'
-                }}
-              >
-                Join us today and embark on a journey of self-discovery and personal growth. Korean Freestyle Martial Arts is a 
-                <strong style={{ color: koreanColors.accent }}> 가족 같은 family-oriented</strong> Club with current members ranging from just 4 years of age to almost 60+ years of age.
-              </Typography>
-            </CardContent>
-          </KoreanCard>
-
-          {/* Statistics Cards */}
-          <Grid container spacing={4}>
-            <Grid xs={12} md={4}>
-              <StatCard>
-                <FeatureIcon>
-                  <StarsIcon />
-                </FeatureIcon>
-                <Typography 
-                  className="stat-number"
-                  variant="h3" 
-                  sx={{ 
-                    color: koreanColors.primary, 
-                    mb: 2, 
-                    fontWeight: 800,
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  20+
-                </Typography>
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
-                    fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                    color: 'text.primary',
-                    fontWeight: 600
-                  }}
-                >
-                  수련 경험 Years of Experience
-                </Typography>
-              </StatCard>
-            </Grid>
-            <Grid xs={12} md={4}>
-              <StatCard>
-                <FeatureIcon>
-                  <FitnessIcon />
-                </FeatureIcon>
-                <Typography 
-                  className="stat-number"
-                  variant="h3" 
-                  sx={{ 
-                    color: koreanColors.primary, 
-                    mb: 2, 
-                    fontWeight: 800,
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  4-60+
-                </Typography>
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
-                    fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                    color: 'text.primary',
-                    fontWeight: 600
-                  }}
-                >
-                  연령대 Age Range
-                </Typography>
-              </StatCard>
-            </Grid>
-            <Grid xs={12} md={4}>
-              <StatCard>
-                <FeatureIcon>
-                  <TrophyIcon />
-                </FeatureIcon>
-                <Typography 
-                  className="stat-number"
-                  variant="h3" 
-                  sx={{ 
-                    color: koreanColors.primary, 
-                    mb: 2, 
-                    fontWeight: 800,
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  100%
-                </Typography>
-                <Typography 
-                  variant="h6" 
-                  sx={{ 
-                    fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                    color: 'text.primary',
-                    fontWeight: 600
-                  }}
-                >
-                  금메달 Competition Gold Medals
-                </Typography>
-              </StatCard>
+              </RevealOnScroll>
             </Grid>
           </Grid>
         </Container>
-      </Section>
+      </Box>
 
-      {/* Contact Section */}
-      <Section
-        ref={contactRef}
-        id="contact"
+
+
+      {/* Products Section - Clean grid layout */}
+      <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: colorPalette.white, position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="lg">
+          
+              <RevealOnScroll>
+                {/* Master Mark Photo */}
+                <Box
+                  sx={{
+                    position: 'relative',
+                    top: -50,
+                    zIndex: 3,
+                    width: '100%',
+                    height: 300,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                <Box
+                  sx={{
+                    zIndex: 3,
+                    width: 250,
+                    height: 250,
+                    position: 'relative',
+                  }}
+                >
+                  <img
+                    src="/public/kfma/11062b_eb537e20e9a443138bef8c8395dee5cb~mv2.avif"
+                    alt="Master Mark Buxton practicing martial arts"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      borderRadius: '50%',
+                      border: `4px solid ${colorPalette.primary}`,
+                      boxShadow: `0 8px 24px ${alpha(colorPalette.black, 0.3)}`,
+                      transition: 'transform 0.3s ease',
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  />
+                  {/* Master credentials overlay */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: -20,
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      backgroundColor: colorPalette.primary,
+                      color: 'white',
+                      px: 3,
+                      py: 1,
+                      borderRadius: 1,
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
+                      whiteSpace: 'nowrap',
+                      boxShadow: `0 4px 12px ${alpha(colorPalette.primary, 0.4)}`,
+                    }}
+                  >
+                    Master Mark Buxton
+                  </Box>
+                </Box>
+              </Box>
+          </RevealOnScroll>
+
+          {/* Master Mark Introduction */}
+                   <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', maxWidth: '900px', mx: 'auto', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontWeight: 300,
+                  lineHeight: 1.2,
+                  color: colorPalette.black,
+                  mb: 2,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Master Mark Buxton
+              </Typography>
+
+              {/* Master credentials */}
+              <Stack direction="row" spacing={3} justifyContent="center" sx={{ mb: 4, flexWrap: 'wrap' }}>
+                <Chip
+                  label="Taekwondo 5th Dan"
+                  sx={{
+                    backgroundColor: colorPalette.primary,
+                    color: 'white',
+                    fontWeight: 600,
+                    fontSize: '0.875rem',
+                    mb: 1,
+                  }}
+                />
+                <Chip
+                  label="Hapkido 4th Dan"
+                  sx={{
+                    backgroundColor: colorPalette.secondary,
+                    color: 'white',
+                    fontWeight: 600,
+                    fontSize: '0.875rem',
+                    mb: 1,
+                  }}
+                />
+                <Chip
+                  label="Kumdo 1st Dan"
+                  sx={{
+                    backgroundColor: colorPalette.gold,
+                    color: colorPalette.black,
+                    fontWeight: 600,
+                    fontSize: '0.875rem',
+                    mb: 1,
+                  }}
+                />
+              </Stack>
+              
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
+                  fontWeight: 300,
+                  color: colorPalette.mediumGray,
+                  lineHeight: 1.6,
+                  mb: 4,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Korean Freestyle Martial Arts was founded by Master Mark Buxton, a dedicated martial artist with over 35 years of experience. 
+                Master Mark offers a supportive environment for all ages, from 4 to 50+. With a deep connection to South Korea, having spent years 
+                living there and immersing himself in the culture and language, Master Mark fosters a friendly and inclusive training atmosphere 
+                where members can improve their fitness, build skills and lifelong friendships.
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+
+
+          {/* KFMA Programs grid - Image-focused design */}
+          <Grid container spacing={4}>
+            {martialArtsPrograms.map((program, index) => (
+              <Grid item xs={12} md={6} key={program.id}>
+                <RevealOnScroll delay={index * 100}>
+                  <Card
+                    sx={{
+                      height: '100%',
+                      borderRadius: 1, // Sharp corners
+                      border: 'none',
+                      boxShadow: `0 4px 16px ${alpha(colorPalette.black, 0.1)}`,
+                      backgroundColor: 'white',
+                      cursor: 'pointer',
+                      overflow: 'hidden',
+                      position: 'relative',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-4px)',
+                        boxShadow: `0 8px 25px ${alpha(program.featureColor, 0.15)}`, // Feature color shadow on hover
+                        '& .program-image': {
+                          transform: 'scale(1.05)',
+                        },
+                        '& .program-overlay': {
+                          opacity: 1,
+                        },
+                        '& .feature-accent': {
+                          width: '100%',
+                        },
+                        '& .content-overlay': {
+                          transform: 'translateY(0)',
+                        },
+                      },
+                    }}
+                    onClick={() => navigate(program.route)}
+                  >
+                    {/* Large Featured Image Container */}
+                    <Box sx={{ position: 'relative', overflow: 'hidden', height: 320 }}>
+                      {/* Feature Color Accent Bar */}
+                      <Box
+                        className="feature-accent"
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          height: 6,
+                          width: '50%',
+                          backgroundColor: program.featureColor,
+                          zIndex: 4,
+                          transition: 'width 0.4s ease',
+                        }}
+                      />
+                      
+                      {/* Main Program Image */}
+                      <Box
+                        component="img"
+                        src={program.image}
+                        alt={program.title}
+                        className="program-image"
+                        sx={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.4s ease',
+                        }}
+                      />
+                      
+                      {/* Dark gradient overlay for text readability */}
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          height: '60%',
+                          background: `linear-gradient(to top, ${alpha(colorPalette.black, 0.8)} 0%, ${alpha(colorPalette.black, 0.4)} 50%, transparent 100%)`,
+                          zIndex: 2,
+                        }}
+                      />
+
+                      {/* Hover overlay with Learn More */}
+                      <Box
+                        className="program-overlay"
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: `linear-gradient(135deg, ${alpha(program.featureColor, 0.9)} 0%, ${alpha(program.featureColor, 0.7)} 100%)`,
+                          opacity: 0,
+                          transition: 'opacity 0.3s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          zIndex: 3,
+                        }}
+                      >
+                        <Typography
+                          variant="h5"
+                          sx={{
+                            color: 'white',
+                            fontWeight: 600,
+                            textAlign: 'center',
+                            px: 2,
+                            fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                          }}
+                        >
+                          Join Program
+                        </Typography>
+                      </Box>
+
+                      {/* Feature Color Icon Badge */}
+                      {/* <Box
+                        sx={{
+                          position: 'absolute',
+                          top: 20,
+                          right: 20,
+                          width: 56,
+                          height: 56,
+                          borderRadius: 1, // Sharp corners
+                          backgroundColor: product.featureColor,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: `0 4px 16px ${alpha(product.featureColor, 0.4)}`,
+                          zIndex: 4,
+                        }}
+                      >
+                        <Box sx={{ color: 'white', fontSize: '1.75rem' }}>
+                          {product.icon}
+                        </Box>
+                      </Box> */}
+
+                      {/* Content overlay on image */}
+                      <Box
+                        className="content-overlay"
+                        sx={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          p: 4,
+                          zIndex: 3,
+                          transform: 'translateY(10px)',
+                          transition: 'transform 0.3s ease',
+                        }}
+                      >
+                        {/* Product Category Tag */}
+                        {/* <Chip
+                          label={product.subtitle}
+                          size="small"
+                          sx={{
+                            backgroundColor: alpha('#ffffff', 0.9),
+                            color: product.featureColor,
+                            fontWeight: 600,
+                            fontSize: '0.75rem',
+                            height: 28,
+                            mb: 2,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            border: `2px solid ${product.featureColor}`,
+                            borderRadius: 0.5,
+                          }}
+                        /> */}
+
+                        {/* Program Title on Image */}
+                        <Typography
+                          variant="h4"
+                          sx={{
+                            fontWeight: 600,
+                            color: 'white',
+                            mb: 2,
+                            lineHeight: 1.2,
+                            fontSize: { xs: '1.5rem', md: '1.75rem' },
+                            fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                            textShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                          }}
+                        >
+                          {program.title}
+                        </Typography>
+                      </Box>
+                    </Box>
+
+                    {/* Description Content Below Image */}
+                    <CardContent sx={{ p: 4, backgroundColor: colorPalette.veryLightGray }}>
+                      {/* Program Description */}
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          color: colorPalette.darkGray,
+                          lineHeight: 1.6,
+                          mb: 3,
+                          fontSize: '1rem',
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                          fontWeight: 300,
+                        }}
+                      >
+                        {program.description}
+                      </Typography>
+
+                      {/* CTA Button with Feature Color */}
+                      {/* <Button
+                        variant="contained"
+                        endIcon={<ArrowForward />}
+                        sx={{
+                          backgroundColor: product.featureColor,
+                          color: 'white',
+                          fontWeight: 600,
+                          textTransform: 'uppercase',
+                          letterSpacing: '1px',
+                          fontSize: '0.875rem',
+                          px: 4,
+                          py: 1.5,
+                          borderRadius: 1,
+                          boxShadow: 'none',
+                          '&:hover': {
+                            backgroundColor: product.featureColor,
+                            transform: 'translateY(-2px)',
+                            boxShadow: `0 6px 20px ${alpha(product.featureColor, 0.3)}`,
+                            '& .MuiSvgIcon-root': {
+                              transform: 'translateX(4px)',
+                            },
+                          },
+                          '& .MuiSvgIcon-root': {
+                            transition: 'transform 0.3s ease',
+                            fontSize: '1rem',
+                          },
+                        }}
+                      >
+                        Explore Solution
+                      </Button> */}
+                    </CardContent>
+                  </Card>
+                </RevealOnScroll>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Leader for AI Vision Hero Section */}
+      <Box
         sx={{
-          backgroundColor: theme.palette.mode === 'dark' ? koreanColors.dark : koreanColors.light,
-          backgroundImage: 'url(/background/image copy 3.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          '&::before': {
-            content: '""',
+          minHeight: '80vh',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
+          zIndex: 5,
+        }}
+      >
+        {/* Background Image */}
+        <Box
+          sx={{
             position: 'absolute',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            background: theme.palette.mode === 'dark' 
-              ? 'rgba(26, 26, 26, 0.9)' 
-              : 'rgba(248, 246, 240, 0.95)',
-            zIndex: 1
-          }
-        }}
-      >
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <SectionTitle variant="h2">
-            연락하기 - Contact Us
-          </SectionTitle>
+            background: `url('/background/image copy 2.png') center/cover no-repeat`,
+            backgroundAttachment: 'fixed',
+            zIndex: 1,
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.6)} 0%, ${alpha(colorPalette.charcoal, 0.7)} 100%)`,
+            zIndex: 2,
+          }}
+        />
 
-          <Grid container spacing={6}>
-            {/* Contact Information */}
-            <Grid xs={12} md={4}>
-              <Stack spacing={3}>
-                <KoreanCard>
-                  <CardContent sx={{ textAlign: 'center', padding: 3 }}>
-                    <FeatureIcon>
-                      <EmailIcon />
-                    </FeatureIcon>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3 }}>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={12} lg={8}>
+              <RevealOnScroll>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
+                    fontWeight: 300,
+                    lineHeight: 1.1,
+                    color: 'white',
+                    mb: 4,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Australian provider of
+                  <Box component="span" sx={{ color: colorPalette.primary, fontWeight: 400 }}>
+                    {' '}Safety Rated
+                  </Box>
+                  <br />
+                  Height and Slew limiting systems
+                </Typography>
+                
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontWeight: 300,
+                    color: colorPalette.lightGray,
+                    lineHeight: 1.5,
+                    mb: 6,
+                    maxWidth: '600px',
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Currently the only Australian-designed system achieving SIL 2/MPL d certification, meeting and exceeding Aurizon and Queensland Rail requirements.
+                </Typography>
+
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<ArrowForward />}
+                  onClick={() => navigate('/services')}
+                  sx={{
+                    background: colorPalette.primary,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    px: 6,
+                    py: 2.5,
+                    borderRadius: 1,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    boxShadow: 'none',
+                    '&:hover': {
+                      backgroundColor: colorPalette.primaryDark,
+                      transform: 'translateY(-2px)',
+                      boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Discover More
+                </Button>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} lg={4}>
+              <RevealOnScroll direction="right">
+                <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
+                  {/* Key Stats */}
+                  <Box sx={{ mb: 4 }}>
                     <Typography
-                      variant="h6"
-                      gutterBottom
-                      sx={{ 
-                        fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                        color: koreanColors.primary,
-                        fontWeight: 600
+                      variant="h2"
+                      sx={{
+                        fontSize: '5rem',
+                        fontWeight: 300,
+                        color: colorPalette.primary,
+                        lineHeight: 1,
+                        mb: 0.5,
+                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                       }}
                     >
-                      Master Instructor Email
+                      <AnimatedCounter 
+                        value={1019}
+                        suffix="k+"
+                        startDelay={0}
+                      />
                     </Typography>
                     <Typography
                       variant="body1"
                       sx={{
-                        wordBreak: 'break-word',
-                        fontFamily: '"Roboto", sans-serif',
-                        color: 'text.primary'
+                        color: 'white',
+                        fontWeight: 600,
+                        fontSize: '1rem',
+                        mb: 0.25,
                       }}
                     >
-                      koreanfreestylema@gmail.com
-                    </Typography>
-                  </CardContent>
-                </KoreanCard>
-
-                <KoreanCard>
-                  <CardContent sx={{ textAlign: 'center', padding: 3 }}>
-                    <FeatureIcon>
-                      <PhoneIcon />
-                    </FeatureIcon>
-                    <Typography
-                      variant="h6"
-                      gutterBottom
-                      sx={{ 
-                        fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                        color: koreanColors.primary,
-                        fontWeight: 600
-                      }}
-                    >
-                      전화번호 Phone
+                      Hours of Operation
                     </Typography>
                     <Typography
-                      variant="h4"
+                      variant="caption"
                       sx={{
-                        fontWeight: 'bold',
-                        color: koreanColors.secondary,
-                        fontFamily: '"Roboto", sans-serif'
+                        color: colorPalette.lightGray,
+                        fontSize: '0.875rem',
                       }}
                     >
-                      0432 289 866
+                      Systems in the field
                     </Typography>
-                  </CardContent>
-                </KoreanCard>
-              </Stack>
-            </Grid>
+                  </Box>
 
-            {/* Contact Form */}
-            <Grid xs={12} md={8}>
-              <KoreanCard>
-                <CardContent sx={{ padding: 4 }}>
-                  <Typography 
-                    variant="h4" 
-                    sx={{ 
-                      mb: 3, 
-                      color: koreanColors.primary, 
-                      fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                      fontWeight: 700
-                    }}
-                  >
-                    KFMA 여정을 시작하세요 - Start Your KFMA Journey
-                  </Typography>
-                  
-                  <Typography 
-                    variant="body1" 
-                    sx={{ 
-                      mb: 4, 
-                      fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                      fontSize: '1.1rem',
-                      lineHeight: 1.6
-                    }}
-                  >
-                    Ready to begin your martial arts journey? Contact us today to start your 
-                    <strong style={{ color: koreanColors.primary }}> 무료 체험 free trial</strong>!
-                  </Typography>
-
-                  <Button
-                    variant="contained"
-                    size="large"
-                    onClick={() => setContactModalOpen(true)}
-                    sx={{
-                      backgroundColor: koreanColors.primary,
-                      px: 4,
-                      py: 2,
-                      fontSize: '1.2rem',
-                      fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                      fontWeight: 600,
-                      borderRadius: '25px',
-                      border: `2px solid ${koreanColors.secondary}`,
-                      textTransform: 'none',
-                      '&:hover': { 
-                        backgroundColor: koreanColors.secondary,
-                        color: koreanColors.dark,
-                        transform: 'translateY(-3px)',
-                        boxShadow: `0 12px 32px rgba(220, 38, 127, 0.4)`
-                      },
-                      mb: 4
-                    }}
-                  >
-                    Contact Us Now
-                  </Button>
-
-                  <Divider sx={{ 
-                    my: 4,
-                    background: `linear-gradient(90deg, ${koreanColors.primary}, ${koreanColors.secondary})`,
-                    height: '2px'
-                  }} />
-
-                  {/* Social Media */}
-                  <Typography 
-                    variant="h5" 
-                    sx={{ 
-                      mb: 3, 
-                      color: koreanColors.primary, 
-                      fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                      fontWeight: 600
-                    }}
-                  >
-                    소셜 미디어 - Follow Us
-                  </Typography>
-                  
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                    <Button
-                      variant="contained"
-                      startIcon={<YouTubeIcon />}
-                      component="a"
-                      href="https://www.youtube.com/@KoreanFreestyleMartialArts"
-                      target="_blank"
+                  <Box>
+                    <Typography
+                      variant="h2"
                       sx={{
-                        backgroundColor: '#FF0000',
-                        borderRadius: '25px',
-                        padding: '12px 24px',
-                        fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                        fontWeight: 600,
-                        textTransform: 'none',
-                        '&:hover': { 
-                          backgroundColor: '#CC0000',
-                          transform: 'translateY(-3px)',
-                          boxShadow: '0 8px 24px rgba(255,0,0,0.3)'
-                        }
+                        fontSize: '5rem',
+                        fontWeight: 300,
+                        color: colorPalette.primary,
+                        lineHeight: 1,
+                        mb: 0.5,
+                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                       }}
                     >
-                      YouTube
-                    </Button>
-                    
-                    <Button
-                      variant="contained"
-                      startIcon={<FacebookIcon />}
-                      component="a"
-                      href="https://www.facebook.com/@korean.freestyle.martial.arts.24"
-                      target="_blank"
+                      <AnimatedCounter 
+                        value={700}
+                        suffix="+"
+                        startDelay={300}
+                      />
+                    </Typography>
+                    <Typography
+                      variant="body1"
                       sx={{
-                        backgroundColor: '#1877F2',
-                        borderRadius: '25px',
-                        padding: '12px 24px',
-                        fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
+                        color: 'white',
                         fontWeight: 600,
-                        textTransform: 'none',
-                        '&:hover': { 
-                          backgroundColor: '#166FE5',
-                          transform: 'translateY(-3px)',
-                          boxShadow: '0 8px 24px rgba(24,119,242,0.3)'
-                        }
+                        fontSize: '1rem',
+                        mb: 0.25,
                       }}
                     >
-                      Facebook
-                    </Button>
-                    
-                    <Button
-                      variant="contained"
-                      startIcon={<InstagramIcon />}
-                      component="a"
-                      href="https://www.instagram.com/koreanfreestylema/"
-                      target="_blank"
+                      Height Limiter Systems Deployed
+                    </Typography>
+                    <Typography
+                      variant="caption"
                       sx={{
-                        backgroundColor: '#E4405F',
-                        borderRadius: '25px',
-                        padding: '12px 24px',
-                        fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-                        fontWeight: 600,
-                        textTransform: 'none',
-                        '&:hover': { 
-                          backgroundColor: '#D62976',
-                          transform: 'translateY(-3px)',
-                          boxShadow: '0 8px 24px rgba(228,64,95,0.3)'
-                        }
+                        color: colorPalette.lightGray,
+                        fontSize: '0.875rem',
                       }}
                     >
-                      Instagram
-                    </Button>
-                  </Stack>
-                </CardContent>
-              </KoreanCard>
+                      Australia Wide
+                    </Typography>
+                  </Box>
+                </Box>
+              </RevealOnScroll>
             </Grid>
           </Grid>
         </Container>
-      </Section>
+      </Box>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <ScrollToTopFab onClick={scrollToTop}>
-          <ArrowUpIcon />
-        </ScrollToTopFab>
-      )}
+      {/* 2/3 Page Content Section - White text on grey background */}
+      <Box sx={{ py: { xs: 12, md: 24 }, backgroundColor: colorPalette.darkGray, position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={12} alignItems="center">
+            <Grid item xs={12} lg={7}>
+              <RevealOnScroll>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontSize: { xs: '2.5rem', md: '4rem' },
+                    fontWeight: 300,
+                    lineHeight: 1.1,
+                    color: 'white',
+                    mb: 4,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Train Together,
+                  <Box component="span" sx={{ color: colorPalette.primary, fontWeight: 400 }}>
+                    {' '}Grow Together
+                  </Box>
+                  <br />
+                  at KFMA
+                </Typography>
+                
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontWeight: 300,
+                    color: colorPalette.lightGray,
+                    lineHeight: 1.6,
+                    mb: 6,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Join our martial arts family at Korean Freestyle Martial Arts and experience the joy of training 
+                  with your loved ones. Many families are part of KFMA, enjoying the journey of growth and practice together.
+                </Typography>
 
-      {/* Contact Modal Dialog */}
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: 'white',
+                    lineHeight: 1.7,
+                    mb: 4,
+                  }}
+                >
+                  With state-of-the-art facilities and a supportive community, we strive to help our students reach their full potential. 
+                  Our experienced Master Instructor believes that confidence, discipline, perseverance and strength are the core values 
+                  of an outstanding Martial Arts School.
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: 'white',
+                    lineHeight: 1.7,
+                    mb: 6,
+                  }}
+                >
+                  Discover the many benefits of training with your children at KFMA and start your family's martial arts adventure today! 
+                  Join us today and embark on a journey of self-discovery and personal growth.
+                </Typography>
+
+                <Button
+                  variant="outlined"
+                  size="large"
+                  endIcon={<ArrowForward />}
+                  onClick={() => navigate('/about')}
+                  sx={{
+                    borderColor: 'white',
+                    color: 'white',
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    px: 6,
+                    py: 2.5,
+                    borderRadius: 1,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    '&:hover': {
+                      backgroundColor: 'white',
+                      color: colorPalette.darkGray,
+                      transform: 'translateY(-2px)',
+                      boxShadow: `0 8px 24px ${alpha('#ffffff', 0.3)}`,
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Learn More
+                </Button>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} lg={5}>
+              <RevealOnScroll direction="right">
+                <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontSize: { xs: '1.75rem', md: '2.25rem' },
+                      fontWeight: 300,
+                      color: 'white',
+                      mb: 4,
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    Training Benefits
+                  </Typography>
+                  
+                  <Stack spacing={3} sx={{ mb: 6 }}>
+                    {trainingBenefits.map((benefit, index) => (
+                      <RevealOnScroll key={index} delay={index * 100}>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+                          <Avatar
+                            sx={{
+                              backgroundColor: colorPalette.primary,
+                              color: 'white',
+                              width: 40,
+                              height: 40,
+                              mt: 0.5,
+                            }}
+                          >
+                            {benefit.icon}
+                          </Avatar>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color: 'white',
+                              fontWeight: 400,
+                              lineHeight: 1.6,
+                            }}
+                          >
+                            {benefit.title}
+                          </Typography>
+                        </Box>
+                      </RevealOnScroll>
+                    ))}
+                  </Stack>
+
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontSize: { xs: '1.75rem', md: '2.25rem' },
+                      fontWeight: 300,
+                      color: 'white',
+                      mb: 4,
+                      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    }}
+                  >
+                    Age Groups & Programs
+                  </Typography>
+                  
+                  <Grid container spacing={2}>
+                    {ageGroups.map((group, index) => (
+                      <Grid item xs={6} sm={4} key={index}>
+                        <RevealOnScroll delay={index * 50}>
+                          <Box
+                            sx={{
+                              textAlign: 'center',
+                              p: 2,
+                              borderRadius: 0.5,
+                              backgroundColor: alpha('#ffffff', 0.1),
+                              transition: 'all 0.3s ease',
+                              '&:hover': {
+                                backgroundColor: alpha('#ffffff', 0.15),
+                                transform: 'translateY(-2px)',
+                                borderColor: colorPalette.primary,
+                              },
+                            }}
+                          >
+                            <Avatar
+                              sx={{
+                                backgroundColor: colorPalette.primary,
+                                color: 'white',
+                                width: 48,
+                                height: 48,
+                                mx: 'auto',
+                                mb: 1,
+                              }}
+                            >
+                              {group.icon}
+                            </Avatar>
+                            <Typography
+                              variant="body2"
+                              sx={{
+                                color: 'white',
+                                fontWeight: 600,
+                                fontSize: '0.875rem',
+                                mb: 0.5,
+                              }}
+                            >
+                              {group.name}
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              sx={{
+                                color: colorPalette.lightGray,
+                                fontSize: '0.75rem',
+                              }}
+                            >
+                              {group.ages}
+                            </Typography>
+                          </Box>
+                        </RevealOnScroll>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Leader for AI Vision Hero Section */}
+      <Box
+        sx={{
+          minHeight: '80vh',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
+          zIndex: 5,
+        }}
+      >
+        {/* Background Image */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `url('/background/image copy 9.png') center/cover no-repeat`,
+            backgroundAttachment: 'fixed',
+            zIndex: 1,
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.6)} 0%, ${alpha(colorPalette.charcoal, 0.7)} 100%)`,
+            zIndex: 2,
+          }}
+        />
+
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 3 }}>
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={12} lg={8}>
+              <RevealOnScroll>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
+                    fontWeight: 300,
+                    lineHeight: 1.1,
+                    color: 'white',
+                    mb: 4,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Leader of
+                  <Box component="span" sx={{ color: colorPalette.primary, fontWeight: 400 }}>
+                    {' '}AI vision
+                  </Box>
+                  <br />
+                  for heavy industry
+                </Typography>
+                
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    fontWeight: 300,
+                    color: colorPalette.lightGray,
+                    lineHeight: 1.5,
+                    mb: 6,
+                    maxWidth: '600px',
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  PRM Engineering Services are specialists in vision systems with advanced AI models custom trained to suit the Australian environment. With cloud datalogging, remote monitoring and over-the-air updates, our systems are designed for the future of heavy industry.
+                </Typography>
+
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<ArrowForward />}
+                  onClick={() => navigate('/services')}
+                  sx={{
+                    background: colorPalette.primary,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    px: 6,
+                    py: 2.5,
+                    borderRadius: 1,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                    boxShadow: 'none',
+                    '&:hover': {
+                      backgroundColor: colorPalette.primaryDark,
+                      transform: 'translateY(-2px)',
+                      boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Discover More
+                </Button>
+              </RevealOnScroll>
+            </Grid>
+
+            <Grid item xs={12} lg={4}>
+              <RevealOnScroll direction="right">
+                <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
+                  {/* Key Stats */}
+                  <Box sx={{ mb: 4 }}>
+                    <Typography
+                      variant="h2"
+                      sx={{
+                        fontSize: '5rem',
+                        fontWeight: 300,
+                        color: colorPalette.primary,
+                        lineHeight: 1,
+                        mb: 0.5,
+                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                      }}
+                    >
+                      <AnimatedCounter 
+                        value={580}
+                        suffix="k+"
+                        startDelay={0}
+                      />
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: 'white',
+                        fontWeight: 600,
+                        fontSize: '1rem',
+                        mb: 0.25,
+                      }}
+                    >
+                      Hours of Operation
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: colorPalette.lightGray,
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Systems in the field
+                    </Typography>
+                  </Box>
+
+                  <Box>
+                    <Typography
+                      variant="h2"
+                      sx={{
+                        fontSize: '5rem',
+                        fontWeight: 300,
+                        color: colorPalette.primary,
+                        lineHeight: 1,
+                        mb: 0.5,
+                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                      }}
+                    >
+                      <AnimatedCounter 
+                        value={400}
+                        suffix="+"
+                        startDelay={300}
+                      />
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: 'white',
+                        fontWeight: 600,
+                        fontSize: '1rem',
+                        mb: 0.25,
+                      }}
+                    >
+                      Systems Deployed
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: colorPalette.lightGray,
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      Australia Wide
+                    </Typography>
+                  </Box>
+                </Box>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Award-Winning Excellence Section */}
+      <Box sx={{ py: 10, backgroundColor: 'white', position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={8} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: colorPalette.primary,
+                    fontWeight: 600,
+                    letterSpacing: '3px',
+                    textTransform: 'uppercase',
+                    fontSize: '0.875rem',
+                    mb: 2,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Recognition & Awards
+                </Typography>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontSize: { xs: '2.5rem', md: '3.5rem' },
+                    fontWeight: 300,
+                    color: colorPalette.black,
+                    mb: 3,
+                    lineHeight: 1.1,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                  }}
+                >
+                  Award-Winning{' '}
+                  <Box component="span" sx={{ color: colorPalette.primary }}>Excellence</Box>
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.125rem',
+                    color: colorPalette.mediumGray,
+                    lineHeight: 1.7,
+                    mb: 4,
+                    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                    fontWeight: 300,
+                  }}
+                >
+                  Our commitment to innovation and safety has been recognized with multiple industry awards. 
+                  From engineering excellence to workplace safety leadership, PRM Engineering continues to set 
+                  the standard for Australian manufacturing excellence.
+                </Typography>
+                
+                <Stack spacing={3}>
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+                    <Avatar
+                      sx={{
+                        backgroundColor: alpha(colorPalette.primary, 0.1),
+                        color: colorPalette.primary,
+                        width: 48,
+                        height: 48,
+                      }}
+                    >
+                      <EmojiEvents />
+                    </Avatar>
+                    <Box>
+                      <Typography 
+                        sx={{ 
+                          color: colorPalette.black, 
+                          fontWeight: 600, 
+                          mb: 0.5,
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                        }}
+                      >
+                        Synaco Safety Innovation Award
+                      </Typography>
+                      <Typography 
+                        sx={{ 
+                          color: colorPalette.mediumGray, 
+                          fontSize: '0.875rem',
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                          fontWeight: 300,
+                        }}
+                      >
+                        Recognized for breakthrough safety technology advancement
+                      </Typography>
+                    </Box>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+                    <Avatar
+                      sx={{
+                        backgroundColor: alpha(colorPalette.success, 0.1),
+                        color: colorPalette.success,
+                        width: 48,
+                        height: 48,
+                      }}
+                    >
+                      <EmojiEvents />
+                    </Avatar>
+                    <Box>
+                      <Typography 
+                        sx={{ 
+                          color: colorPalette.black, 
+                          fontWeight: 600, 
+                          mb: 0.5,
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                        }}
+                      >
+                        Safe Work and Return to Work Awards
+                      </Typography>
+                      <Typography 
+                        sx={{ 
+                          color: colorPalette.mediumGray, 
+                          fontSize: '0.875rem',
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                          fontWeight: 300,
+                        }}
+                      >
+                        Best solution to an identified work health and safety issue
+                      </Typography>
+                    </Box>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+                    <Avatar
+                      sx={{
+                        backgroundColor: alpha(colorPalette.warning, 0.1),
+                        color: colorPalette.warning,
+                        width: 48,
+                        height: 48,
+                      }}
+                    >
+                      <CheckCircle />
+                    </Avatar>
+                    <Box>
+                      <Typography 
+                        sx={{ 
+                          color: colorPalette.black, 
+                          fontWeight: 600, 
+                          mb: 0.5,
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                        }}
+                      >
+                        Australian Made Campaign Member
+                      </Typography>
+                      <Typography 
+                        sx={{ 
+                          color: colorPalette.mediumGray, 
+                          fontSize: '0.875rem',
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                          fontWeight: 300,
+                        }}
+                      >
+                        Proudly supporting local manufacturing and innovation
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Stack>
+              </RevealOnScroll>
+            </Grid>
+            
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll>
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        borderRadius: 0,
+                        overflow: 'hidden',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                        transform: 'rotate(-2deg)',
+                        transition: 'transform 0.3s ease',
+                        '&:hover': {
+                          transform: 'rotate(0deg) scale(1.05)',
+                        },
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        src="/prm-engineering/PRM-Engineering-Services-Award-Cert.jpg"
+                        alt="Award Certificate"
+                        sx={{
+                          width: '100%',
+                          height: 'auto',
+                          display: 'block',
+                        }}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        borderRadius: 0,
+                        overflow: 'hidden',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                        transform: 'rotate(2deg)',
+                        transition: 'transform 0.3s ease',
+                        '&:hover': {
+                          transform: 'rotate(0deg) scale(1.05)',
+                        },
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        src="/prm-engineering/Australian-Made.jpg"
+                        alt="Australian Made"
+                        sx={{
+                          width: '100%',
+                          height: 'auto',
+                          display: 'block',
+                        }}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        borderRadius: 0,
+                        overflow: 'hidden',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                        mt: 2,
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        src="/prm-engineering/Synaco-Safety-Award-PRM-Engineering-Services1.jpg"
+                        alt="Safety Award"
+                        sx={{
+                          width: '100%',
+                          height: 'auto',
+                          display: 'block',
+                        }}
+                      />
+                    </Box>
+                  </Grid>
+                </Grid>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Final CTA Section - Clean and minimal */}
+      <Box
+        sx={{
+          py: 12,
+          background: colorPalette.black,
+          color: 'white',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 5,
+        }}
+      >
+        <Container maxWidth="lg">
+          <RevealOnScroll>
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: { xs: '2.5rem', md: '3.5rem' },
+                fontWeight: 300,
+                mb: 3,
+                lineHeight: 1.1,
+                fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+              }}
+            >
+              Get in touch with us today!
+            </Typography>
+            
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: '1.125rem',
+                mb: 5,
+                opacity: 0.8,
+                maxWidth: '600px',
+                mx: 'auto',
+                lineHeight: 1.6,
+              }}
+            >
+              We're here to answer your questions and are on hand to help inform you 
+              of every aspect regarding your enquiry. We take great pride in using our expertise.
+            </Typography>
+            
+            <Button
+              variant="contained"
+              size="large"
+              endIcon={<ArrowForward />}
+              onClick={() => navigate('/contact')}
+              sx={{
+                background: colorPalette.primary,
+                fontSize: '1rem',
+                fontWeight: 600,
+                px: 6,
+                py: 2.5,
+                borderRadius: 1,
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                boxShadow: 'none',
+                '&:hover': {
+                  backgroundColor: colorPalette.primaryDark,
+                  transform: 'translateY(-2px)',
+                  boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Contact Us
+            </Button>
+
+            {/* Contact Information */}
+            <Box sx={{ mt: 6, pt: 4, borderTop: `1px solid ${alpha('#ffffff', 0.2)}` }}>
+              <Typography variant="body1" sx={{ opacity: 0.8, mb: 1 }}>
+                Ready to talk? Call us directly.
+              </Typography>
+              <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                +61 (0)7 3711 2779
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+        </Container>
+      </Box>
+
+      {/* Simple modal for demo */}
       <Dialog
-        open={contactModalOpen}
-        onClose={() => setContactModalOpen(false)}
-        maxWidth="sm"
+        open={videoModalOpen}
+        onClose={() => setVideoModalOpen(false)}
+        maxWidth="md"
         fullWidth
         PaperProps={{
           sx: {
-            borderRadius: '16px',
-            border: `2px solid ${koreanColors.primary}`,
-            background: theme.palette.mode === 'dark' 
-              ? `linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(220, 38, 127, 0.1) 100%)`
-              : `linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(220, 38, 127, 0.05) 100%)`,
-            backdropFilter: 'blur(10px)'
-          }
+            borderRadius: 2,
+            overflow: 'hidden',
+          },
         }}
       >
-        <DialogTitle sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottom: `2px solid ${koreanColors.primary}`,
-          background: `linear-gradient(90deg, ${koreanColors.primary}, ${koreanColors.secondary})`
-        }}>
-          <Typography 
-            variant="h5" 
-            sx={{ 
-              fontFamily: '"Noto Sans KR", "Roboto", sans-serif', 
-              fontWeight: 700, 
-              color: 'white'
-            }}
-          >
-            KFMA 여정 시작하기 - Start Your KFMA Journey
+        <DialogTitle sx={{ p: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>
+            PRM Engineering Demo
           </Typography>
-          <IconButton 
-            onClick={() => setContactModalOpen(false)}
-            sx={{ color: 'white' }}
-          >
-            <CloseIcon />
+          <IconButton onClick={() => setVideoModalOpen(false)}>
+            <Close />
           </IconButton>
         </DialogTitle>
-        
-        <DialogContent sx={{ pt: 3 }}>
-          <Typography 
-            variant="body1" 
-            sx={{ 
-              mb: 3, 
-              fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-              fontSize: '1.1rem'
-            }}
-          >
-            Ready to begin your martial arts journey? Fill out the form below and we'll get back to you soon!
-          </Typography>
-          
-          <Grid container spacing={2}>
-            <Grid xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="First Name"
-                value={contactForm.firstName}
-                onChange={(e) => handleFormChange('firstName', e.target.value)}
-                required
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '12px',
-                    '&.Mui-focused fieldset': {
-                      borderColor: koreanColors.primary,
-                    },
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: koreanColors.primary,
-                  },
-                }}
-              />
-            </Grid>
-            <Grid xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Last Name"
-                value={contactForm.lastName}
-                onChange={(e) => handleFormChange('lastName', e.target.value)}
-                required
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '12px',
-                    '&.Mui-focused fieldset': {
-                      borderColor: koreanColors.primary,
-                    },
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: koreanColors.primary,
-                  },
-                }}
-              />
-            </Grid>
-            <Grid xs={12}>
-              <TextField
-                fullWidth
-                label="Email"
-                type="email"
-                value={contactForm.email}
-                onChange={(e) => handleFormChange('email', e.target.value)}
-                required
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '12px',
-                    '&.Mui-focused fieldset': {
-                      borderColor: koreanColors.primary,
-                    },
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: koreanColors.primary,
-                  },
-                }}
-              />
-            </Grid>
-            <Grid xs={12}>
-              <TextField
-                fullWidth
-                label="Phone"
-                type="tel"
-                value={contactForm.phone}
-                onChange={(e) => handleFormChange('phone', e.target.value)}
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '12px',
-                    '&.Mui-focused fieldset': {
-                      borderColor: koreanColors.primary,
-                    },
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: koreanColors.primary,
-                  },
-                }}
-              />
-            </Grid>
-            <Grid xs={12}>
-              <TextField
-                fullWidth
-                label="How can KFMA help you?"
-                multiline
-                rows={4}
-                value={contactForm.message}
-                onChange={(e) => handleFormChange('message', e.target.value)}
-                placeholder="Tell us about your martial arts goals, experience level, or any questions you have..."
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: '12px',
-                    '&.Mui-focused fieldset': {
-                      borderColor: koreanColors.primary,
-                    },
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: koreanColors.primary,
-                  },
-                }}
-              />
-            </Grid>
-          </Grid>
-        </DialogContent>
-        
-        <DialogActions sx={{ p: 3, borderTop: `1px solid ${koreanColors.primary}30` }}>
-          <Button
-            onClick={() => setContactModalOpen(false)}
-            sx={{ 
-              fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-              borderRadius: '25px'
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleContactSubmit}
-            variant="contained"
-            disabled={!contactForm.firstName || !contactForm.lastName || !contactForm.email}
+        <DialogContent sx={{ p: 3, minHeight: 300, backgroundColor: colorPalette.veryLightGray }}>
+          <Box
             sx={{
-              backgroundColor: koreanColors.primary,
-              fontFamily: '"Noto Sans KR", "Roboto", sans-serif',
-              borderRadius: '25px',
-              border: `2px solid ${koreanColors.secondary}`,
-              '&:hover': { 
-                backgroundColor: koreanColors.secondary,
-                color: koreanColors.dark
-              },
-              '&:disabled': { backgroundColor: '#ccc' }
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 300,
+              color: colorPalette.mediumGray,
             }}
           >
-            Submit
-          </Button>
-        </DialogActions>
+            <Stack alignItems="center" spacing={2}>
+              <PlayArrow sx={{ fontSize: '3rem', color: colorPalette.primary }} />
+              <Typography variant="h6">
+                Demo content available soon
+              </Typography>
+              <Typography variant="body2">
+                Contact us for a personalized demonstration
+              </Typography>
+            </Stack>
+          </Box>
+        </DialogContent>
       </Dialog>
     </Box>
   );
