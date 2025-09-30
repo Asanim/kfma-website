@@ -929,7 +929,7 @@ const Home: React.FC = () => {
         </Container>
       </Box>
 
-      {/* Leader for AI Vision Hero Section */}
+      {/* Free Trial & Pricing Hero Section */}
       <Box
         sx={{
           minHeight: '80vh',
@@ -948,7 +948,7 @@ const Home: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: `url('/background/image copy 2.png') center/cover no-repeat`,
+            background: `url('/public/kfma/12f29b_031041a90ff34c618133bce229fddbd5~mv2.avif') center/cover no-repeat`,
             backgroundAttachment: 'fixed',
             zIndex: 1,
           }}
@@ -962,7 +962,7 @@ const Home: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.6)} 0%, ${alpha(colorPalette.charcoal, 0.7)} 100%)`,
+            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.7)} 0%, ${alpha(colorPalette.charcoal, 0.8)} 100%)`,
             zIndex: 2,
           }}
         />
@@ -982,12 +982,12 @@ const Home: React.FC = () => {
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
                 >
-                  Australian provider of
+                  Start Your
                   <Box component="span" sx={{ color: colorPalette.primary, fontWeight: 400 }}>
-                    {' '}Safety Rated
+                    {' '}Free Trial
                   </Box>
                   <br />
-                  Height and Slew limiting systems
+                  Today!
                 </Typography>
                 
                 <Typography
@@ -998,123 +998,119 @@ const Home: React.FC = () => {
                     color: colorPalette.lightGray,
                     lineHeight: 1.5,
                     mb: 6,
-                    maxWidth: '600px',
+                    maxWidth: '700px',
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
                 >
-                  Currently the only Australian-designed system achieving SIL 2/MPL d certification, meeting and exceeding Aurizon and Queensland Rail requirements.
+                  Enjoy a 2-week Free Trial! Sign up in the first week to receive an additional 2 weeks FREE! 
+                  Experience our exceptional training in Taekwondo & Hapkido with no commitment.
                 </Typography>
 
-                <Button
-                  variant="contained"
-                  size="large"
-                  endIcon={<ArrowForward />}
-                  onClick={() => navigate('/services')}
-                  sx={{
-                    background: colorPalette.primary,
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    px: 6,
-                    py: 2.5,
-                    borderRadius: 1,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    boxShadow: 'none',
-                    '&:hover': {
-                      backgroundColor: colorPalette.primaryDark,
-                      transform: 'translateY(-2px)',
-                      boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
-                    },
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  Discover More
-                </Button>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} sx={{ mb: 4 }}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    endIcon={<ArrowForward />}
+                    onClick={() => navigate('/free-trial')}
+                    sx={{
+                      background: colorPalette.primary,
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      px: 6,
+                      py: 2.5,
+                      borderRadius: 1,
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      boxShadow: 'none',
+                      '&:hover': {
+                        backgroundColor: colorPalette.primaryDark,
+                        transform: 'translateY(-2px)',
+                        boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                      },
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    Start Free Trial
+                  </Button>
+                  
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    onClick={() => navigate('/pricing')}
+                    sx={{
+                      borderColor: 'white',
+                      color: 'white',
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      px: 6,
+                      py: 2.5,
+                      borderRadius: 1,
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                      '&:hover': {
+                        backgroundColor: alpha('white', 0.1),
+                        borderColor: 'white',
+                      },
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    View Pricing
+                  </Button>
+                </Stack>
               </RevealOnScroll>
             </Grid>
 
             <Grid item xs={12} lg={4}>
               <RevealOnScroll direction="right">
                 <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
-                  {/* Key Stats */}
-                  <Box sx={{ mb: 4 }}>
+                  {/* Free Trial Benefits */}
+                  <Box 
+                    sx={{ 
+                      backgroundColor: alpha('white', 0.1), 
+                      borderRadius: 2, 
+                      p: 4,
+                      backdropFilter: 'blur(10px)',
+                    }}
+                  >
                     <Typography
-                      variant="h2"
+                      variant="h4"
                       sx={{
-                        fontSize: '5rem',
-                        fontWeight: 300,
-                        color: colorPalette.primary,
-                        lineHeight: 1,
-                        mb: 0.5,
+                        fontSize: { xs: '1.5rem', md: '2rem' },
+                        fontWeight: 600,
+                        color: 'white',
+                        mb: 3,
                         fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                       }}
                     >
-                      <AnimatedCounter 
-                        value={1019}
-                        suffix="k+"
-                        startDelay={0}
-                      />
+                      What's Included:
                     </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: 'white',
-                        fontWeight: 600,
-                        fontSize: '1rem',
-                        mb: 0.25,
-                      }}
-                    >
-                      Hours of Operation
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: colorPalette.lightGray,
-                        fontSize: '0.875rem',
-                      }}
-                    >
-                      Systems in the field
-                    </Typography>
-                  </Box>
-
-                  <Box>
-                    <Typography
-                      variant="h2"
-                      sx={{
-                        fontSize: '5rem',
-                        fontWeight: 300,
-                        color: colorPalette.primary,
-                        lineHeight: 1,
-                        mb: 0.5,
-                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
-                      }}
-                    >
-                      <AnimatedCounter 
-                        value={700}
-                        suffix="+"
-                        startDelay={300}
-                      />
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: 'white',
-                        fontWeight: 600,
-                        fontSize: '1rem',
-                        mb: 0.25,
-                      }}
-                    >
-                      Height Limiter Systems Deployed
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: colorPalette.lightGray,
-                        fontSize: '0.875rem',
-                      }}
-                    >
-                      Australia Wide
-                    </Typography>
+                    
+                    <Stack spacing={2}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
+                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                          2-week Free Trial
+                        </Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
+                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                          Discounted Uniform
+                        </Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
+                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                          Complimentary Taekwondo Grading
+                        </Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
+                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                          Complimentary Hapkido Grading
+                        </Typography>
+                      </Box>
+                    </Stack>
                   </Box>
                 </Box>
               </RevealOnScroll>
@@ -1340,7 +1336,7 @@ const Home: React.FC = () => {
         </Container>
       </Box>
 
-      {/* Leader for AI Vision Hero Section */}
+      {/* Competition Success Hero Section */}
       <Box
         sx={{
           minHeight: '80vh',
@@ -1359,7 +1355,7 @@ const Home: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: `url('/background/image copy 9.png') center/cover no-repeat`,
+            background: `url('/public/kfma/12f29b_16d3aa9f3e5546de91424e3920b5c2d4~mv2.avif') center/cover no-repeat`,
             backgroundAttachment: 'fixed',
             zIndex: 1,
           }}
@@ -1373,7 +1369,7 @@ const Home: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.6)} 0%, ${alpha(colorPalette.charcoal, 0.7)} 100%)`,
+            background: `linear-gradient(135deg, ${alpha(colorPalette.black, 0.7)} 0%, ${alpha(colorPalette.charcoal, 0.8)} 100%)`,
             zIndex: 2,
           }}
         />
@@ -1393,12 +1389,12 @@ const Home: React.FC = () => {
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
                 >
-                  Leader of
-                  <Box component="span" sx={{ color: colorPalette.primary, fontWeight: 400 }}>
-                    {' '}AI vision
+                  Team KFMA
+                  <Box component="span" sx={{ color: colorPalette.gold, fontWeight: 400 }}>
+                    {' '}Champions
                   </Box>
                   <br />
-                  for heavy industry
+                  2025 Success
                 </Typography>
                 
                 <Typography
@@ -1409,20 +1405,23 @@ const Home: React.FC = () => {
                     color: colorPalette.lightGray,
                     lineHeight: 1.5,
                     mb: 6,
-                    maxWidth: '600px',
+                    maxWidth: '700px',
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
                 >
-                  PRM Engineering Services are specialists in vision systems with advanced AI models custom trained to suit the Australian environment. With cloud datalogging, remote monitoring and over-the-air updates, our systems are designed for the future of heavy industry.
+                  Our competition team has achieved 100% gold medal success in 2025 competitions including 
+                  Gold Coast Open and Caboolture Open. Train with dedication, compete with pride, 
+                  and represent KFMA with excellence.
                 </Typography>
 
                 <Button
                   variant="contained"
                   size="large"
-                  endIcon={<ArrowForward />}
-                  onClick={() => navigate('/services')}
+                  endIcon={<EmojiEvents />}
+                  onClick={() => navigate('/competition-team')}
                   sx={{
-                    background: colorPalette.primary,
+                    background: colorPalette.gold,
+                    color: colorPalette.black,
                     fontSize: '1rem',
                     fontWeight: 600,
                     px: 6,
@@ -1432,14 +1431,14 @@ const Home: React.FC = () => {
                     letterSpacing: '1px',
                     boxShadow: 'none',
                     '&:hover': {
-                      backgroundColor: colorPalette.primaryDark,
+                      backgroundColor: '#FFE55C',
                       transform: 'translateY(-2px)',
-                      boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                      boxShadow: `0 8px 24px ${alpha(colorPalette.gold, 0.4)}`,
                     },
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  Discover More
+                  Join Competition Team
                 </Button>
               </RevealOnScroll>
             </Grid>
@@ -1447,22 +1446,22 @@ const Home: React.FC = () => {
             <Grid item xs={12} lg={4}>
               <RevealOnScroll direction="right">
                 <Box sx={{ textAlign: { xs: 'center', lg: 'left' } }}>
-                  {/* Key Stats */}
+                  {/* Competition Stats */}
                   <Box sx={{ mb: 4 }}>
                     <Typography
                       variant="h2"
                       sx={{
                         fontSize: '5rem',
                         fontWeight: 300,
-                        color: colorPalette.primary,
+                        color: colorPalette.gold,
                         lineHeight: 1,
                         mb: 0.5,
                         fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                       }}
                     >
                       <AnimatedCounter 
-                        value={580}
-                        suffix="k+"
+                        value={100}
+                        suffix="%"
                         startDelay={0}
                       />
                     </Typography>
@@ -1475,7 +1474,7 @@ const Home: React.FC = () => {
                         mb: 0.25,
                       }}
                     >
-                      Hours of Operation
+                      Gold Medal Success
                     </Typography>
                     <Typography
                       variant="caption"
@@ -1484,24 +1483,24 @@ const Home: React.FC = () => {
                         fontSize: '0.875rem',
                       }}
                     >
-                      Systems in the field
+                      2025 Competitions
                     </Typography>
                   </Box>
 
-                  <Box>
+                  <Box sx={{ mb: 4 }}>
                     <Typography
                       variant="h2"
                       sx={{
                         fontSize: '5rem',
                         fontWeight: 300,
-                        color: colorPalette.primary,
+                        color: colorPalette.gold,
                         lineHeight: 1,
                         mb: 0.5,
                         fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                       }}
                     >
                       <AnimatedCounter 
-                        value={400}
+                        value={10}
                         suffix="+"
                         startDelay={300}
                       />
@@ -1515,7 +1514,7 @@ const Home: React.FC = () => {
                         mb: 0.25,
                       }}
                     >
-                      Systems Deployed
+                      Gold Medals Won
                     </Typography>
                     <Typography
                       variant="caption"
@@ -1524,7 +1523,30 @@ const Home: React.FC = () => {
                         fontSize: '0.875rem',
                       }}
                     >
-                      Australia Wide
+                      Gold Coast & Caboolture Opens
+                    </Typography>
+                  </Box>
+
+                  <Box>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: 'white',
+                        fontStyle: 'italic',
+                        fontSize: '1rem',
+                        mb: 2,
+                      }}
+                    >
+                      "Good etiquette is what sets KFMA apart"
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: colorPalette.lightGray,
+                        fontSize: '0.875rem',
+                      }}
+                    >
+                      - Master Mark Buxton
                     </Typography>
                   </Box>
                 </Box>
@@ -1579,9 +1601,8 @@ const Home: React.FC = () => {
                     fontWeight: 300,
                   }}
                 >
-                  Our commitment to innovation and safety has been recognized with multiple industry awards. 
-                  From engineering excellence to workplace safety leadership, PRM Engineering continues to set 
-                  the standard for Australian manufacturing excellence.
+                  Hear from our KFMA family about their martial arts journey, personal growth, 
+                  and the life-changing benefits of training at Korean Freestyle Martial Arts.
                 </Typography>
                 
                 <Stack spacing={3}>
@@ -1777,6 +1798,238 @@ const Home: React.FC = () => {
         </Container>
       </Box>
 
+      {/* Pricing & Membership Section */}
+      <Box sx={{ py: { xs: 10, md: 15 }, backgroundColor: colorPalette.veryLightGray, position: 'relative', zIndex: 5 }}>
+        <Container maxWidth="lg">
+          <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', mb: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontWeight: 300,
+                  lineHeight: 1.2,
+                  color: colorPalette.black,
+                  mb: 4,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Membership &{' '}
+                <Box component="span" sx={{ color: colorPalette.primary }}>Pricing</Box>
+              </Typography>
+              
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
+                  fontWeight: 300,
+                  color: colorPalette.mediumGray,
+                  lineHeight: 1.6,
+                  maxWidth: '600px',
+                  mx: 'auto',
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Affordable family-friendly pricing with flexible payment options. All fees are paid by monthly subscription.
+              </Typography>
+            </Box>
+          </RevealOnScroll>
+
+          <Grid container spacing={4}>
+            {/* KFMA Start Up Training Kit */}
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll delay={100}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    borderRadius: 2,
+                    boxShadow: `0 8px 32px ${alpha(colorPalette.primary, 0.15)}`,
+                    border: `2px solid ${colorPalette.primary}`,
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* Featured Badge */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: -10,
+                      right: 20,
+                      backgroundColor: colorPalette.primary,
+                      color: 'white',
+                      px: 3,
+                      py: 1,
+                      borderRadius: '0 0 8px 8px',
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '1px',
+                    }}
+                  >
+                    Best Value
+                  </Box>
+                  
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontWeight: 600,
+                        color: colorPalette.primary,
+                        mb: 2,
+                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                      }}
+                    >
+                      KFMA Start Up Training Kit
+                    </Typography>
+                    
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: colorPalette.mediumGray,
+                        mb: 3,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      Everything you need to get started in one discounted package
+                    </Typography>
+
+                    <Box sx={{ mb: 4 }}>
+                      <Typography
+                        variant="h3"
+                        sx={{
+                          fontWeight: 700,
+                          color: colorPalette.primary,
+                          mb: 1,
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                        }}
+                      >
+                        $250
+                        <Typography component="span" variant="body1" sx={{ color: colorPalette.mediumGray, ml: 1 }}>
+                          Feb - Oct
+                        </Typography>
+                      </Typography>
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontWeight: 700,
+                          color: colorPalette.primary,
+                          fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                        }}
+                      >
+                        $215
+                        <Typography component="span" variant="body1" sx={{ color: colorPalette.mediumGray, ml: 1 }}>
+                          Oct - Jan
+                        </Typography>
+                      </Typography>
+                    </Box>
+
+                    <Stack spacing={2} sx={{ mb: 4 }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.25rem' }} />
+                        <Typography>Membership Fee</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.25rem' }} />
+                        <Typography>Annual Fee</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.25rem' }} />
+                        <Typography>KFMA Uniform</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.25rem' }} />
+                        <Typography>KFMA Club T-shirt</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.25rem' }} />
+                        <Typography>KFMA Training Bag</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.25rem' }} />
+                        <Typography>KFMA Jet-tag & Cap</Typography>
+                      </Box>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </RevealOnScroll>
+            </Grid>
+
+            {/* Monthly Training Fees */}
+            <Grid item xs={12} md={6}>
+              <RevealOnScroll delay={200}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    borderRadius: 2,
+                    boxShadow: `0 4px 16px ${alpha(colorPalette.black, 0.1)}`,
+                    border: `1px solid ${alpha(colorPalette.mediumGray, 0.2)}`,
+                  }}
+                >
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontWeight: 600,
+                        color: colorPalette.black,
+                        mb: 2,
+                        fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                      }}
+                    >
+                      Monthly Training Fees
+                    </Typography>
+                    
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: colorPalette.mediumGray,
+                        mb: 4,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      Family-friendly pricing with discounts for multiple family members
+                    </Typography>
+
+                    <Stack spacing={3} sx={{ mb: 4 }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 2, borderBottom: `1px solid ${alpha(colorPalette.mediumGray, 0.2)}` }}>
+                        <Typography sx={{ fontWeight: 600 }}>Single Student</Typography>
+                        <Typography sx={{ fontWeight: 700, color: colorPalette.primary, fontSize: '1.25rem' }}>$107/month</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 2, borderBottom: `1px solid ${alpha(colorPalette.mediumGray, 0.2)}` }}>
+                        <Typography sx={{ fontWeight: 600 }}>Family of 2</Typography>
+                        <Typography sx={{ fontWeight: 700, color: colorPalette.primary, fontSize: '1.25rem' }}>$177/month</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 2, borderBottom: `1px solid ${alpha(colorPalette.mediumGray, 0.2)}` }}>
+                        <Typography sx={{ fontWeight: 600 }}>Family of 3</Typography>
+                        <Typography sx={{ fontWeight: 700, color: colorPalette.primary, fontSize: '1.25rem' }}>$239/month</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 2, borderBottom: `1px solid ${alpha(colorPalette.mediumGray, 0.2)}` }}>
+                        <Typography sx={{ fontWeight: 600 }}>Family of 4</Typography>
+                        <Typography sx={{ fontWeight: 700, color: colorPalette.primary, fontSize: '1.25rem' }}>$290/month</Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 2 }}>
+                        <Typography sx={{ fontWeight: 600, color: colorPalette.primary }}>5th Family Member</Typography>
+                        <Typography sx={{ fontWeight: 700, color: colorPalette.success, fontSize: '1.25rem' }}>FREE</Typography>
+                      </Box>
+                    </Stack>
+
+                    <Box sx={{ backgroundColor: alpha(colorPalette.primary, 0.1), p: 3, borderRadius: 1, mb: 3 }}>
+                      <Typography sx={{ fontWeight: 600, mb: 1 }}>Additional Fees:</Typography>
+                      <Typography variant="body2" sx={{ mb: 1 }}>• Lifetime Membership: $25</Typography>
+                      <Typography variant="body2" sx={{ mb: 1 }}>• Annual Fee: $89 (Due upon joining and February each year)</Typography>
+                      <Typography variant="body2">• Grading Belt Fee: $19.50</Typography>
+                    </Box>
+                    
+                    <Typography variant="body2" sx={{ color: colorPalette.mediumGray, fontStyle: 'italic' }}>
+                      Casual Training Fee available at $150 per month for 1 student
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </RevealOnScroll>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
       {/* Final CTA Section - Clean and minimal */}
       <Box
         sx={{
@@ -1844,14 +2097,37 @@ const Home: React.FC = () => {
               Contact Us
             </Button>
 
-            {/* Contact Information */}
+            {/* KFMA Contact Information */}
             <Box sx={{ mt: 6, pt: 4, borderTop: `1px solid ${alpha('#ffffff', 0.2)}` }}>
-              <Typography variant="body1" sx={{ opacity: 0.8, mb: 1 }}>
-                Ready to talk? Call us directly.
-              </Typography>
-              <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                +61 (0)7 3711 2779
-              </Typography>
+              <Grid container spacing={4} sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+                <Grid item xs={12} md={4}>
+                  <Typography variant="body1" sx={{ opacity: 0.8, mb: 1 }}>
+                    Call Master Mark:
+                  </Typography>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
+                    0432 289 866
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Typography variant="body1" sx={{ opacity: 0.8, mb: 1 }}>
+                    Training Times:
+                  </Typography>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
+                    Tue & Thu 5:45PM-8PM
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Typography variant="body1" sx={{ opacity: 0.8, mb: 1 }}>
+                    Location:
+                  </Typography>
+                  <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                    Regents Park State School
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                    42-60 Emerald Drive, Regents Park 4118
+                  </Typography>
+                </Grid>
+              </Grid>
             </Box>
           </RevealOnScroll>
         </Container>
@@ -1872,7 +2148,7 @@ const Home: React.FC = () => {
       >
         <DialogTitle sx={{ p: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            PRM Engineering Demo
+            KFMA Training Videos
           </Typography>
           <IconButton onClick={() => setVideoModalOpen(false)}>
             <Close />
@@ -1889,13 +2165,36 @@ const Home: React.FC = () => {
             }}
           >
             <Stack alignItems="center" spacing={2}>
-              <PlayArrow sx={{ fontSize: '3rem', color: colorPalette.primary }} />
+              <SportsMartialArts sx={{ fontSize: '3rem', color: colorPalette.primary }} />
               <Typography variant="h6">
-                Demo content available soon
+                Training videos coming soon
               </Typography>
               <Typography variant="body2">
-                Contact us for a personalized demonstration
+                Follow us on social media for the latest training content
               </Typography>
+              <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                <Button 
+                  variant="outlined" 
+                  size="small"
+                  onClick={() => window.open('https://www.youtube.com/@KoreanFreestyleMartialArts', '_blank')}
+                >
+                  YouTube
+                </Button>
+                <Button 
+                  variant="outlined" 
+                  size="small"
+                  onClick={() => window.open('https://www.facebook.com/@korean.freestyle.martial.arts.24', '_blank')}
+                >
+                  Facebook
+                </Button>
+                <Button 
+                  variant="outlined" 
+                  size="small"
+                  onClick={() => window.open('https://www.instagram.com/koreanfreestylema/', '_blank')}
+                >
+                  Instagram
+                </Button>
+              </Stack>
             </Stack>
           </Box>
         </DialogContent>
