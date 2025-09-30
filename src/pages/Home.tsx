@@ -347,7 +347,7 @@ const Home: React.FC = () => {
       <Box
         sx={{
           minHeight: '100vh',
-          color: 'white',
+          color: '#ffffff',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
@@ -398,7 +398,7 @@ const Home: React.FC = () => {
                     size="small"
                     sx={{
                       background: colorPalette.primaryGradient,
-                      color: 'white',
+                      color: '#ffffff',
                       fontWeight: 600,
                       fontSize: '0.75rem',
                       letterSpacing: '1px',
@@ -521,7 +521,7 @@ const Home: React.FC = () => {
                       <Typography
                         variant="body1"
                         sx={{
-                          color: 'white',
+                          color: '#ffffff',
                           fontWeight: 600,
                           fontSize: '1rem',
                           mb: 0.25,
@@ -602,7 +602,7 @@ const Home: React.FC = () => {
                       left: '50%',
                       transform: 'translateX(-50%)',
                       backgroundColor: colorPalette.primary,
-                      color: 'white',
+                      color: '#ffffff',
                       px: 3,
                       py: 1,
                       borderRadius: 1,
@@ -641,7 +641,7 @@ const Home: React.FC = () => {
                   label="Taekwondo 5th Dan"
                   sx={{
                     backgroundColor: colorPalette.primary,
-                    color: 'white',
+                    color: '#ffffff',
                     fontWeight: 600,
                     fontSize: '0.875rem',
                     mb: 1,
@@ -651,7 +651,7 @@ const Home: React.FC = () => {
                   label="Hapkido 4th Dan"
                   sx={{
                     backgroundColor: colorPalette.secondary,
-                    color: 'white',
+                    color: '#ffffff',
                     fontWeight: 600,
                     fontSize: '0.875rem',
                     mb: 1,
@@ -700,7 +700,7 @@ const Home: React.FC = () => {
                       borderRadius: 1, // Sharp corners
                       border: 'none',
                       boxShadow: `0 4px 16px ${alpha(colorPalette.black, 0.1)}`,
-                      backgroundColor: 'white',
+                      backgroundColor: '#ffffff',
                       cursor: 'pointer',
                       overflow: 'hidden',
                       position: 'relative',
@@ -789,7 +789,7 @@ const Home: React.FC = () => {
                         <Typography
                           variant="h5"
                           sx={{
-                            color: 'white',
+                            color: '#ffffff',
                             fontWeight: 600,
                             textAlign: 'center',
                             px: 2,
@@ -817,7 +817,7 @@ const Home: React.FC = () => {
                           zIndex: 4,
                         }}
                       >
-                        <Box sx={{ color: 'white', fontSize: '1.75rem' }}>
+                        <Box sx={{ color: '#ffffff', fontSize: '1.75rem' }}>
                           {product.icon}
                         </Box>
                       </Box> */}
@@ -859,7 +859,7 @@ const Home: React.FC = () => {
                           variant="h4"
                           sx={{
                             fontWeight: 600,
-                            color: 'white',
+                            color: '#ffffff',
                             mb: 2,
                             lineHeight: 1.2,
                             fontSize: { xs: '1.5rem', md: '1.75rem' },
@@ -895,7 +895,7 @@ const Home: React.FC = () => {
                         endIcon={<ArrowForward />}
                         sx={{
                           backgroundColor: product.featureColor,
-                          color: 'white',
+                          color: '#ffffff',
                           fontWeight: 600,
                           textTransform: 'uppercase',
                           letterSpacing: '1px',
@@ -977,7 +977,7 @@ const Home: React.FC = () => {
                     fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
                     fontWeight: 300,
                     lineHeight: 1.1,
-                    color: 'white',
+                    color: '#ffffff',
                     mb: 4,
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
@@ -1038,8 +1038,8 @@ const Home: React.FC = () => {
                     size="large"
                     onClick={() => navigate('/pricing')}
                     sx={{
-                      borderColor: 'white',
-                      color: 'white',
+                      borderColor: '#ffffff',
+                      color: '#ffffff',
                       fontSize: '1rem',
                       fontWeight: 600,
                       px: 6,
@@ -1048,8 +1048,8 @@ const Home: React.FC = () => {
                       textTransform: 'uppercase',
                       letterSpacing: '1px',
                       '&:hover': {
-                        backgroundColor: alpha('white', 0.1),
-                        borderColor: 'white',
+                        backgroundColor: alpha('#ffffff', 0.1),
+                        borderColor: '#ffffff',
                       },
                       transition: 'all 0.3s ease',
                     }}
@@ -1066,7 +1066,7 @@ const Home: React.FC = () => {
                   {/* Free Trial Benefits */}
                   <Box 
                     sx={{ 
-                      backgroundColor: alpha('white', 0.1), 
+                      backgroundColor: alpha('#ffffff', 0.1), 
                       borderRadius: 2, 
                       p: 4,
                       backdropFilter: 'blur(10px)',
@@ -1077,7 +1077,7 @@ const Home: React.FC = () => {
                       sx={{
                         fontSize: { xs: '1.5rem', md: '2rem' },
                         fontWeight: 600,
-                        color: 'white',
+                        color: '#ffffff',
                         mb: 3,
                         fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                       }}
@@ -1088,25 +1088,25 @@ const Home: React.FC = () => {
                     <Stack spacing={2}>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
-                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                        <Typography sx={{ color: '#ffffff', fontWeight: 500 }}>
                           2-week Free Trial
                         </Typography>
                       </Box>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
-                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                        <Typography sx={{ color: '#ffffff', fontWeight: 500 }}>
                           Discounted Uniform
                         </Typography>
                       </Box>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
-                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                        <Typography sx={{ color: '#ffffff', fontWeight: 500 }}>
                           Complimentary Taekwondo Grading
                         </Typography>
                       </Box>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <CheckCircle sx={{ color: colorPalette.primary, fontSize: '1.5rem' }} />
-                        <Typography sx={{ color: 'white', fontWeight: 500 }}>
+                        <Typography sx={{ color: '#ffffff', fontWeight: 500 }}>
                           Complimentary Hapkido Grading
                         </Typography>
                       </Box>
@@ -1131,7 +1131,7 @@ const Home: React.FC = () => {
                     fontSize: { xs: '2.5rem', md: '4rem' },
                     fontWeight: 300,
                     lineHeight: 1.1,
-                    color: 'white',
+                    color: '#ffffff',
                     mb: 4,
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
@@ -1163,7 +1163,7 @@ const Home: React.FC = () => {
                   variant="body1"
                   sx={{
                     fontSize: '1.125rem',
-                    color: 'white',
+                    color: '#ffffff',
                     lineHeight: 1.7,
                     mb: 4,
                   }}
@@ -1177,7 +1177,7 @@ const Home: React.FC = () => {
                   variant="body1"
                   sx={{
                     fontSize: '1.125rem',
-                    color: 'white',
+                    color: '#ffffff',
                     lineHeight: 1.7,
                     mb: 6,
                   }}
@@ -1192,8 +1192,8 @@ const Home: React.FC = () => {
                   endIcon={<ArrowForward />}
                   onClick={() => navigate('/about')}
                   sx={{
-                    borderColor: 'white',
-                    color: 'white',
+                    borderColor: '#ffffff',
+                    color: '#ffffff',
                     fontSize: '1rem',
                     fontWeight: 600,
                     px: 6,
@@ -1202,7 +1202,7 @@ const Home: React.FC = () => {
                     textTransform: 'uppercase',
                     letterSpacing: '1px',
                     '&:hover': {
-                      backgroundColor: 'white',
+                      backgroundColor: '#ffffff',
                       color: colorPalette.darkGray,
                       transform: 'translateY(-2px)',
                       boxShadow: `0 8px 24px ${alpha('#ffffff', 0.3)}`,
@@ -1223,7 +1223,7 @@ const Home: React.FC = () => {
                     sx={{
                       fontSize: { xs: '1.75rem', md: '2.25rem' },
                       fontWeight: 300,
-                      color: 'white',
+                      color: '#ffffff',
                       mb: 4,
                       fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                     }}
@@ -1238,7 +1238,7 @@ const Home: React.FC = () => {
                           <Avatar
                             sx={{
                               backgroundColor: colorPalette.primary,
-                              color: 'white',
+                              color: '#ffffff',
                               width: 40,
                               height: 40,
                               mt: 0.5,
@@ -1249,7 +1249,7 @@ const Home: React.FC = () => {
                           <Typography
                             variant="body1"
                             sx={{
-                              color: 'white',
+                              color: '#ffffff',
                               fontWeight: 400,
                               lineHeight: 1.6,
                             }}
@@ -1266,7 +1266,7 @@ const Home: React.FC = () => {
                     sx={{
                       fontSize: { xs: '1.75rem', md: '2.25rem' },
                       fontWeight: 300,
-                      color: 'white',
+                      color: '#ffffff',
                       mb: 4,
                       fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                     }}
@@ -1295,7 +1295,7 @@ const Home: React.FC = () => {
                             <Avatar
                               sx={{
                                 backgroundColor: colorPalette.primary,
-                                color: 'white',
+                                color: '#ffffff',
                                 width: 48,
                                 height: 48,
                                 mx: 'auto',
@@ -1307,7 +1307,7 @@ const Home: React.FC = () => {
                             <Typography
                               variant="body2"
                               sx={{
-                                color: 'white',
+                                color: '#ffffff',
                                 fontWeight: 600,
                                 fontSize: '0.875rem',
                                 mb: 0.5,
@@ -1384,7 +1384,7 @@ const Home: React.FC = () => {
                     fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
                     fontWeight: 300,
                     lineHeight: 1.1,
-                    color: 'white',
+                    color: '#ffffff',
                     mb: 4,
                     fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
                   }}
@@ -1468,7 +1468,7 @@ const Home: React.FC = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: 'white',
+                        color: '#ffffff',
                         fontWeight: 600,
                         fontSize: '1rem',
                         mb: 0.25,
@@ -1508,7 +1508,7 @@ const Home: React.FC = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: 'white',
+                        color: '#ffffff',
                         fontWeight: 600,
                         fontSize: '1rem',
                         mb: 0.25,
@@ -1531,7 +1531,7 @@ const Home: React.FC = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: 'white',
+                        color: '#ffffff',
                         fontStyle: 'italic',
                         fontSize: '1rem',
                         mb: 2,
@@ -1557,7 +1557,7 @@ const Home: React.FC = () => {
       </Box>
 
       {/* Award-Winning Excellence Section */}
-      <Box sx={{ py: 10, backgroundColor: 'white', position: 'relative', zIndex: 5 }}>
+      <Box sx={{ py: 10, backgroundColor: '#ffffff', position: 'relative', zIndex: 5 }}>
         <Container maxWidth="xl">
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -1856,7 +1856,7 @@ const Home: React.FC = () => {
                       top: -10,
                       right: 20,
                       backgroundColor: colorPalette.primary,
-                      color: 'white',
+                      color: '#ffffff',
                       px: 3,
                       py: 1,
                       borderRadius: '0 0 8px 8px',
@@ -2035,7 +2035,7 @@ const Home: React.FC = () => {
         sx={{
           py: 12,
           background: colorPalette.black,
-          color: 'white',
+          color: '#ffffff',
           textAlign: 'center',
           position: 'relative',
           zIndex: 5,
