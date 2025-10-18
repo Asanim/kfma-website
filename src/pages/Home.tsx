@@ -714,6 +714,68 @@ const Home: React.FC = () => {
             </Box>
           </RevealOnScroll>
 
+          {/* Train Together Section */}
+          <RevealOnScroll>
+            <Box sx={{ textAlign: 'center', maxWidth: '900px', mx: 'auto', mb: 12, mt: 8 }}>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: '2.5rem', md: '3.5rem' },
+                  fontWeight: 300,
+                  lineHeight: 1.2,
+                  color: colorPalette.black,
+                  mb: 4,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Train{' '}
+                <Box component="span" sx={{ color: colorPalette.primary }}>Together</Box>
+              </Typography>
+              
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: { xs: '1.125rem', md: '1.25rem' },
+                  fontWeight: 300,
+                  color: colorPalette.mediumGray,
+                  lineHeight: 1.6,
+                  mb: 4,
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Join our martial arts family at Korean Freestyle Martial Arts and experience the joy of training 
+                with your loved ones. Many families are part of KFMA, enjoying the journey of growth and practice 
+                together - check out our families in the pictures below. Discover the many benefits of training 
+                with your children at KFMA and start your family's martial arts adventure today!
+              </Typography>
+
+              <Button
+                variant="contained"
+                size="large"
+                endIcon={<ArrowForward />}
+                onClick={() => navigate('/contact')}
+                sx={{
+                  background: colorPalette.primary,
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  px: 6,
+                  py: 2.5,
+                  borderRadius: 1,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  boxShadow: 'none',
+                  '&:hover': {
+                    backgroundColor: colorPalette.primaryDark,
+                    transform: 'translateY(-2px)',
+                    boxShadow: `0 8px 24px ${alpha(colorPalette.primary, 0.4)}`,
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                Contact KFMA Now!
+              </Button>
+            </Box>
+          </RevealOnScroll>
 
           {/* KFMA Programs grid - Image-focused design */}
           <Grid container spacing={4}>
