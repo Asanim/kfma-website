@@ -838,6 +838,150 @@ const Home: React.FC = () => {
             </Container>
           </Box>
 
+          {/* Family Training Carousel */}
+          <RevealOnScroll>
+            <Box sx={{ mb: 8 }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: { xs: '1.75rem', md: '2.25rem' },
+                  fontWeight: 300,
+                  color: colorPalette.black,
+                  mb: 6,
+                  textAlign: 'center',
+                  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+                }}
+              >
+                Our KFMA{' '}
+                <Box component="span" sx={{ color: colorPalette.primary }}>Family Gallery</Box>
+              </Typography>
+
+              <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 3,
+                    pb: 2,
+                    overflowX: 'auto',
+                    scrollBehavior: 'smooth',
+                    '&::-webkit-scrollbar': {
+                      height: 8,
+                    },
+                    '&::-webkit-scrollbar-track': {
+                      backgroundColor: alpha(colorPalette.lightGray, 0.3),
+                      borderRadius: 4,
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      backgroundColor: colorPalette.primary,
+                      borderRadius: 4,
+                      '&:hover': {
+                        backgroundColor: colorPalette.primaryDark,
+                      },
+                    },
+                  }}
+                >
+                  {[
+                    '/public/kfma/12f29b_765382ecc924426c917b311474b1aefe~mv2.avif',
+                    '/public/kfma/6442710547835271098_edited_edited.jpg',
+                    '/public/kfma/12f29b_031041a90ff34c618133bce229fddbd5~mv2_002.avif',
+                    '/public/kfma/12f29b_05614dcb336e46888a42d5612ef59298~mv2_002.avif',
+                    '/public/kfma/11062b_eb537e20e9a443138bef8c8395dee5cb~mv2_002.avif',
+                    '/public/kfma/result_img_2024_12_26_08_18_23.jpg',
+                    '/public/kfma/12f29b_16d3aa9f3e5546de91424e3920b5c2d4~mv2_002.avif',
+                  ].map((image, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        minWidth: 320,
+                        height: 240,
+                        position: 'relative',
+                        borderRadius: 2,
+                        overflow: 'hidden',
+                        boxShadow: `0 4px 16px ${alpha(colorPalette.black, 0.15)}`,
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          transform: 'translateY(-4px) scale(1.02)',
+                          boxShadow: `0 8px 25px ${alpha(colorPalette.primary, 0.2)}`,
+                          '& .carousel-image': {
+                            transform: 'scale(1.1)',
+                          },
+                          '& .carousel-overlay': {
+                            opacity: 1,
+                          },
+                        },
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        src={image}
+                        alt={`KFMA Family Training ${index + 1}`}
+                        className="carousel-image"
+                        sx={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.4s ease',
+                        }}
+                      />
+                      
+                      {/* Hover overlay */}
+                      <Box
+                        className="carousel-overlay"
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: `linear-gradient(135deg, ${alpha(colorPalette.primary, 0.8)} 0%, ${alpha(colorPalette.black, 0.6)} 100%)`,
+                          opacity: 0,
+                          transition: 'opacity 0.3s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <PhotoLibrary sx={{ color: '#ffffff', fontSize: '2.5rem' }} />
+                      </Box>
+
+                      {/* Image number indicator */}
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: 12,
+                          right: 12,
+                          backgroundColor: alpha(colorPalette.black, 0.7),
+                          color: '#ffffff',
+                          px: 1.5,
+                          py: 0.5,
+                          borderRadius: 1,
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                        }}
+                      >
+                        {index + 1} / {7}
+                      </Box>
+                    </Box>
+                  ))}
+                </Box>
+
+                {/* Scroll instruction text */}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    textAlign: 'center',
+                    color: colorPalette.mediumGray,
+                    mt: 2,
+                    fontSize: '0.875rem',
+                  }}
+                >
+                  ← Scroll to see more family training moments →
+                </Typography>
+              </Box>
+            </Box>
+          </RevealOnScroll>
+
           {/* KFMA Programs grid - Image-focused design */}
           <Grid container spacing={4}>
             {martialArtsPrograms.map((program, index) => (
