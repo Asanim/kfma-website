@@ -342,9 +342,35 @@ const Home: React.FC = () => {
 
   return (
     <Box sx={{ overflow: 'hidden', background: colorPalette.white }}>
-      {/* Floating Featured Article */}
-      {/* <FloatingFeaturedArticle /> */}
-      
+
+
+      <Box
+        sx={{
+          minHeight: '80vh',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          overflow: 'hidden',
+          zIndex: 5,
+        }}
+      >
+        {/* Background Image */}
+        <Box
+          sx={{
+            position: 'absolute',
+            width: '50%',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `url('/public/new/logo.png') center/cover no-repeat`,
+            zIndex: 1,
+          }}
+        />
+      </Box>
+        
+
+
       {/* Modern Hero Section with Carousel Background */}
       <Box
         sx={{
@@ -357,24 +383,22 @@ const Home: React.FC = () => {
         }}
       >
         {/* Carousel Background Images */}
-        {backgroundImages.map((image, index) => (
           <Box
-            key={index}
             sx={{
               position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
               bottom: 0,
-              background: `url('${image}') center/cover no-repeat`,
-              backgroundAttachment: 'fixed',
-              opacity: index === currentImageIndex ? 1 : 0,
-              transition: 'opacity 2s ease-in-out',
+              background: `url('/public/kfma/file_004.mp4') center/cover no-repeat`,
+              // background: `url('${image}') center/cover no-repeat`,
+              // backgroundAttachment: 'fixed',
+              // opacity: index === currentImageIndex ? 1 : 0,
+              // transition: 'opacity 2s ease-in-out',
               zIndex: 1,
             }}
           />
-        ))}
-        
+
         {/* Dark Overlay */}
         <Box
           sx={{
